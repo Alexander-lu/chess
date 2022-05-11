@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.URL;
@@ -58,7 +59,7 @@ class GameTest {
     Game.main(new String[0]);
     List<String> actualOutput = Arrays.asList(outputStreamCaptor.toString().trim().split("\\R"));
     List<String> expectedOutput = Arrays.asList(
-        Files.readString(Path.of(getClass().getClassLoader().getResource(outputFilename).getPath().substring(1)))
+        Files.readString(new File(getClass().getClassLoader().getResource(outputFilename).getPath()).toPath())
             .trim()
             .split("\\R")
     );

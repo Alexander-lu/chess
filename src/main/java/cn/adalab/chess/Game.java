@@ -2,11 +2,11 @@ package cn.adalab.chess;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.nio.file.Path;
+import java.util.*;
 
 public class Game {
+    List<Map<String,Integer>> listMove = new ArrayList<Map<String,Integer>>();
     List<String> actions = new ArrayList<>();
     int[][] chessBoard = {
             {1, 2, 3, 4, 5, 4, 3, 2, 1},
@@ -21,7 +21,7 @@ public class Game {
             {8, 9, 10, 11, 12, 11, 10, 9, 8},
     };
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         Game a = new Game();
         a.loadActions(sc);
@@ -80,7 +80,9 @@ public class Game {
             System.out.println("");
         }
     }
-
+    /**
+     * 功能：红方移动棋子
+     */
     public void playerRedMove(int a, int b, int c, int d) {
         switch (chessBoard[a][b]) {
             case 8:
@@ -382,7 +384,9 @@ public class Game {
         }
 
     }
-
+    /**
+     * 功能：黑方移动棋子
+     */
     public void playerBlackMove(int a, int b, int c, int d) {
         int count=0;
         switch (chessBoard[a][b]) {
@@ -691,7 +695,9 @@ public class Game {
                 break;
         }
     }
-
+    /**
+     * 功能：读取文件获取Actions
+     */
     public boolean loadActions(Scanner scanner) {
         try {
             int nAction = scanner.nextInt();
@@ -706,19 +712,23 @@ public class Game {
         }
         return true;
     }
+    /**
+     * 功能：读取文件跑游戏
+     */
     public void gameMove(){
         boolean ifNext = true;
         for (int i = 0; i < actions.size(); i++) {
+            int actiona = 0;
+            int actionb = 0;
+            int actionc = 0;
+            int actiond = 0;
+            int actionToCharArray1If = 0;
+            char[] actionToCharArray = actions.get(i).toCharArray();
+            String actionToCharArray1 = new String(actionToCharArray, 0, 1);
+            String actionToCharArray2 = new String(actionToCharArray, 1, 1);
+            String actionToCharArray3 = new String(actionToCharArray, 2, 1);
+            String actionToCharArray4 = new String(actionToCharArray, 3, 1);
             if (ifNext) {
-                int actiona = 0;
-                int actionb = 0;
-                int actionc = 0;
-                int actiond = 0;
-                char[] actionToCharArray = actions.get(i).toCharArray();
-                String actionToCharArray1 = new String(actionToCharArray, 0, 1);
-                String actionToCharArray2 = new String(actionToCharArray, 1, 1);
-                String actionToCharArray3 = new String(actionToCharArray, 2, 1);
-                String actionToCharArray4 = new String(actionToCharArray, 3, 1);
                 switch (actionToCharArray2) {
                     case "一":
                         actionb = 8;
@@ -750,7 +760,6 @@ public class Game {
                     default:
                         break;
                 }
-                int actionToCharArray1If = 0;
                 switch (actionToCharArray1) {
                     case "炮":
                         actionToCharArray1If = 13;
@@ -776,19 +785,12 @@ public class Game {
                     default:
                         break;
                 }
-                boolean ifFind = true;
                 for (int paoi = 0; paoi < chessBoard.length; paoi++) {
                     if (chessBoard[paoi][actionb] == actionToCharArray1If) {
                         actiona = paoi;
-                        ifFind = false;
                         break;
                     }
                 }
-                if(ifFind){
-                    System.out.println((i+1)+". error");
-                    i++;
-                    System.out.println((i+1)+". skip");
-                    continue;}
                 if (actionToCharArray1If == 8) {
                     if (actionToCharArray3.equals("进")) {
                         switch (actionToCharArray4) {
@@ -1466,20 +1468,23 @@ public class Game {
                     System.out.println((i+1)+". 红方胜");
                     break;
                 }
-                playerRedMove(actiona, actionb, actionc, actiond);
-                System.out.println((i+1)+". ok");
-                ifNext = false;
+                if(isAbleToMove(actiona, actionb, actionc, actiond)){
+                    if(check()){
+                    playerRedMove(actiona, actionb, actionc, actiond);
+                    System.out.println((i+1)+". ok");
+                    ifNext = false;}
+                    else{
+                        System.out.println((i+1)+". 将军");
+                        continue;
+                    }
+                }else {
+                    System.out.println((i+1)+". error");
+                    i++;
+                    System.out.println((i+1)+". skip");
+                    continue;
+                }
             }
             else{
-                int actiona = 0;
-                int actionb = 0;
-                int actionc = 0;
-                int actiond = 0;
-                char[] actionToCharArray = actions.get(i).toCharArray();
-                String actionToCharArray1 = new String(actionToCharArray, 0, 1);
-                String actionToCharArray2 = new String(actionToCharArray, 1, 1);
-                String actionToCharArray3 = new String(actionToCharArray, 2, 1);
-                String actionToCharArray4 = new String(actionToCharArray, 3, 1);
                 switch (actionToCharArray2) {
                     case "1":
                         actionb = 0;
@@ -1511,7 +1516,6 @@ public class Game {
                     default:
                         break;
                 }
-                int actionToCharArray1If = 0;
                 switch (actionToCharArray1) {
                     case "炮":
                         actionToCharArray1If = 6;
@@ -1537,19 +1541,12 @@ public class Game {
                     default:
                         break;
                 }
-                boolean ifFind = true;
                 for (int paoi = 0; paoi < chessBoard.length; paoi++) {
                     if (chessBoard[paoi][actionb] == actionToCharArray1If) {
                         actiona = paoi;
-                        ifFind = false;
                         break;
                     }
                 }
-                if(ifFind){
-                    System.out.println((i+1)+". error");
-                    i++;
-                    System.out.println((i+1)+". skip");
-                    continue;}
                 if (actionToCharArray1If == 1) {
                     if (actionToCharArray3.equals("进")) {
                         switch (actionToCharArray4) {
@@ -2197,11 +2194,407 @@ public class Game {
                     System.out.println((i+1)+". 黑方胜");
                     break;
                 }
-                playerBlackMove(actiona, actionb, actionc, actiond);
-                System.out.println((i+1)+". ok");
-                ifNext = true;
+                if(isAbleToMove(actiona, actionb, actionc, actiond)){
+                    if(check()){
+                        playerBlackMove(actiona, actionb, actionc, actiond);
+                        System.out.println((i+1)+". ok");
+                        ifNext = true;}
+                    else{
+                        System.out.println((i+1)+". 将军");
+                    }
+                }else {
+                    System.out.println((i+1)+". error");
+                    i++;
+                    System.out.println((i+1)+". skip");
+                }
             }
 
         }
+    }
+    /**
+     * 功能：判断从(a,b)能否移动到（c,d）
+     */
+    public boolean isAbleToMove(int a, int b, int c, int d){
+        //不能吃自己伙的棋子
+        switch (chessBoard[a][b]) {
+            case 0:
+                return false;
+            case 1:
+                if (chessBoard[c][d] == 1) {
+                    return false;
+                } else if (chessBoard[c][d] == 2) {
+                    return false;
+                } else if (chessBoard[c][d] == 3) {
+                    return false;
+                } else if (chessBoard[c][d] == 4) {
+                    return false;
+                } else if (chessBoard[c][d] == 5) {
+                    return false;
+                } else if (chessBoard[c][d] == 6) {
+                    return false;
+                } else if (chessBoard[c][d] == 7) {
+                    return false;
+                }
+                //不能走斜线
+
+                //竖走
+
+                //判断中间是否有棋子
+
+                //横走
+
+                //判断中间是否有棋子
+            case 2:
+                if (chessBoard[c][d] == 1) {
+                    return false;
+                } else if (chessBoard[c][d] == 2) {
+                    return false;
+                } else if (chessBoard[c][d] == 3) {
+                    return false;
+                } else if (chessBoard[c][d] == 4) {
+                    return false;
+                } else if (chessBoard[c][d] == 5) {
+                    return false;
+                } else if (chessBoard[c][d] == 6) {
+                    return false;
+                } else if (chessBoard[c][d] == 7) {
+                    return false;
+                }
+                //必须走日字格
+
+                //向上跳
+
+
+                //向下跳
+
+                //向左跳
+
+                //向右跳
+            case 3:
+                if (chessBoard[c][d] == 1) {
+                    return false;
+                } else if (chessBoard[c][d] == 2) {
+                    return false;
+                } else if (chessBoard[c][d] == 3) {
+                    return false;
+                } else if (chessBoard[c][d] == 4) {
+                    return false;
+                } else if (chessBoard[c][d] == 5) {
+                    return false;
+                } else if (chessBoard[c][d] == 6) {
+                    return false;
+                } else if (chessBoard[c][d] == 7) {
+                    return false;
+                }
+                //不能越界
+
+                //不能走横线或竖线
+
+                //一次只能走二格
+
+                //是否堵象眼
+            case 4:
+                if (chessBoard[c][d] == 1) {
+                    return false;
+                } else if (chessBoard[c][d] == 2) {
+                    return false;
+                } else if (chessBoard[c][d] == 3) {
+                    return false;
+                } else if (chessBoard[c][d] == 4) {
+                    return false;
+                } else if (chessBoard[c][d] == 5) {
+                    return false;
+                } else if (chessBoard[c][d] == 6) {
+                    return false;
+                } else if (chessBoard[c][d] == 7) {
+                    return false;
+                }
+                //不能出九宫
+
+                //一次只能走一格
+
+                //不能走横线或竖线
+            case 5:
+                if (chessBoard[c][d] == 1) {
+                    return false;
+                } else if (chessBoard[c][d] == 2) {
+                    return false;
+                } else if (chessBoard[c][d] == 3) {
+                    return false;
+                } else if (chessBoard[c][d] == 4) {
+                    return false;
+                } else if (chessBoard[c][d] == 5) {
+                    return false;
+                } else if (chessBoard[c][d] == 6) {
+                    return false;
+                } else if (chessBoard[c][d] == 7) {
+                    return false;
+                }
+                //不能出九宫
+
+                //一次只能走一格
+
+                //不能走斜线
+
+                //将帅不能露脸
+                //目标棋子是将帅并且在同一列上
+                //判断中间是否有棋子
+//                int count = 0;
+//                int min = Math.min(oldRow,_newRow);
+//                int max = Math.max(oldRow,_newRow);
+//                for(int row=min+1;row<max;row++)
+//                {
+//                    if(this.gamePanel.chessBoradState[row][_newColumn] != -1){count++;}
+//                }
+//                if(count == 0){return false;}
+            case 6:
+                if (chessBoard[c][d] == 1) {
+                    return false;
+                } else if (chessBoard[c][d] == 2) {
+                    return false;
+                } else if (chessBoard[c][d] == 3) {
+                    return false;
+                } else if (chessBoard[c][d] == 4) {
+                    return false;
+                } else if (chessBoard[c][d] == 5) {
+                    return false;
+                } else if (chessBoard[c][d] == 6) {
+                    return false;
+                } else if (chessBoard[c][d] == 7) {
+                    return false;
+                }
+                //炮
+
+                //不能走斜线
+
+                //竖走
+
+                //判断中间是否有棋子
+
+                //横走
+
+                //判断中间是否有棋子
+
+                //开始判断是否可以移动或吃棋子
+            case 7:
+                if (chessBoard[c][d] == 1) {
+                    return false;
+                } else if (chessBoard[c][d] == 2) {
+                    return false;
+                } else if (chessBoard[c][d] == 3) {
+                    return false;
+                } else if (chessBoard[c][d] == 4) {
+                    return false;
+                } else if (chessBoard[c][d] == 5) {
+                    return false;
+                } else if (chessBoard[c][d] == 6) {
+                    return false;
+                } else if (chessBoard[c][d] == 7) {
+                    return false;
+                }
+                //卒兵
+
+                //不能走斜线
+
+                //一次只能走一格
+
+                //小卒过河不回头
+
+                //过河了
+
+                //下方
+                //过河了
+                //不许向后退
+                //只能往前走
+            case 8:
+                if (chessBoard[c][d] == 8) {
+                    return false;
+                } else if (chessBoard[c][d] == 9) {
+                    return false;
+                } else if (chessBoard[c][d] == 10) {
+                    return false;
+                } else if (chessBoard[c][d] == 11) {
+                    return false;
+                } else if (chessBoard[c][d] == 12) {
+                    return false;
+                } else if (chessBoard[c][d] == 13) {
+                    return false;
+                } else if (chessBoard[c][d] == 14) {
+                    return false;
+                }
+            case 9:
+                if (chessBoard[c][d] == 8) {
+                    return false;
+                } else if (chessBoard[c][d] == 9) {
+                    return false;
+                } else if (chessBoard[c][d] == 10) {
+                    return false;
+                } else if (chessBoard[c][d] == 11) {
+                    return false;
+                } else if (chessBoard[c][d] == 12) {
+                    return false;
+                } else if (chessBoard[c][d] == 13) {
+                    return false;
+                } else if (chessBoard[c][d] == 14) {
+                    return false;
+                }
+                //必须走日字格
+
+                //向上跳
+
+
+                //向下跳
+
+                //向左跳
+
+                //向右跳
+            case 10:
+                if (chessBoard[c][d] == 8) {
+                    return false;
+                } else if (chessBoard[c][d] == 9) {
+                    return false;
+                } else if (chessBoard[c][d] == 10) {
+                    return false;
+                } else if (chessBoard[c][d] == 11) {
+                    return false;
+                } else if (chessBoard[c][d] == 12) {
+                    return false;
+                } else if (chessBoard[c][d] == 13) {
+                    return false;
+                } else if (chessBoard[c][d] == 14) {
+                    return false;
+                }
+                //不能越界
+
+                //不能走横线或竖线
+
+                //一次只能走二格
+
+                //是否堵象眼
+            case 11:
+                if (chessBoard[c][d] == 8) {
+                    return false;
+                } else if (chessBoard[c][d] == 9) {
+                    return false;
+                } else if (chessBoard[c][d] == 10) {
+                    return false;
+                } else if (chessBoard[c][d] == 11) {
+                    return false;
+                } else if (chessBoard[c][d] == 12) {
+                    return false;
+                } else if (chessBoard[c][d] == 13) {
+                    return false;
+                } else if (chessBoard[c][d] == 14) {
+                    return false;
+                }
+                //不能出九宫
+
+                //一次只能走一格
+
+                //不能走横线或竖线
+            case 12:
+                if (chessBoard[c][d] == 8) {
+                    return false;
+                } else if (chessBoard[c][d] == 9) {
+                    return false;
+                } else if (chessBoard[c][d] == 10) {
+                    return false;
+                } else if (chessBoard[c][d] == 11) {
+                    return false;
+                } else if (chessBoard[c][d] == 12) {
+                    return false;
+                } else if (chessBoard[c][d] == 13) {
+                    return false;
+                } else if (chessBoard[c][d] == 14) {
+                    return false;
+                }
+                //不能出九宫
+
+                //一次只能走一格
+
+                //不能走斜线
+
+                //将帅不能露脸
+                //目标棋子是将帅并且在同一列上
+                //判断中间是否有棋子
+//                int count = 0;
+//                int min = Math.min(oldRow,_newRow);
+//                int max = Math.max(oldRow,_newRow);
+//                for(int row=min+1;row<max;row++)
+//                {
+//                    if(this.gamePanel.chessBoradState[row][_newColumn] != -1){count++;}
+//                }
+//                if(count == 0){return false;}
+            case 13:
+                if (chessBoard[c][d] == 8) {
+                    return false;
+                } else if (chessBoard[c][d] == 9) {
+                    return false;
+                } else if (chessBoard[c][d] == 10) {
+                    return false;
+                } else if (chessBoard[c][d] == 11) {
+                    return false;
+                } else if (chessBoard[c][d] == 12) {
+                    return false;
+                } else if (chessBoard[c][d] == 13) {
+                    return false;
+                } else if (chessBoard[c][d] == 14) {
+                    return false;
+                }
+            case 14:
+                if (chessBoard[c][d] == 8) {
+                    return false;
+                } else if (chessBoard[c][d] == 9) {
+                    return false;
+                } else if (chessBoard[c][d] == 10) {
+                    return false;
+                } else if (chessBoard[c][d] == 11) {
+                    return false;
+                } else if (chessBoard[c][d] == 12) {
+                    return false;
+                } else if (chessBoard[c][d] == 13) {
+                    return false;
+                } else if (chessBoard[c][d] == 14) {
+                    return false;
+                }
+            default:
+                break;
+        }
+        return true;
+    }
+    /**
+     * 功能：得到某棋子的可移动路线图
+     */
+    private void getMoveRoute(int a, int b) {
+        listMove.clear();
+        //懒得分类挑，反正电脑计算快
+        for (int row = 0; row < chessBoard.length; row++) {
+            for (int col = 0; col < chessBoard[0].length; col++) {
+                if (isAbleToMove(a,b,row,col)) {
+                    Map<String, Integer> map = new HashMap<String, Integer>();
+                    map.put("row", row);
+                    map.put("col", col);
+                    listMove.add(map);
+                }
+            }
+        }
+    }
+    /**
+     * 功能：检查是否将军
+     */
+    private boolean check() {
+        //全体循环，不知道将哪头的军
+        for (int row = 0; row < chessBoard.length; row++) {
+            for (int col = 0; col < chessBoard[0].length; col++) {
+                getMoveRoute(row, col);
+                for (Map<String, Integer> map : listMove) {
+                    if ((chessBoard[map.get("row")][map.get("col")]) == 5 | (chessBoard[map.get("row")][map.get("col")]) == 12) {
+                        return false;
+                    }
+                }
+                listMove.clear();
+            }
+        }
+        return true;
     }
 }
