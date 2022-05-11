@@ -22,14 +22,11 @@ public class Game {
     };
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         Game a = new Game();
-        a.loadActions("src/main/resources/input5148.txt");
-        a.printChessBoard();
-        System.out.println("");
-        System.out.println(a.actions);
+        a.loadActions(sc);
         a.gameMove();
         }
-//    }
 
     public void printChessBoard() {
         int width = chessBoard[0].length;    // 心形的宽度
@@ -695,9 +692,8 @@ public class Game {
         }
     }
 
-    public boolean loadActions(String path) {
+    public boolean loadActions(Scanner scanner) {
         try {
-            Scanner scanner = new Scanner(new File(path));
             int nAction = scanner.nextInt();
             // 读取所有地点
             for (int i = 0; i < nAction; i++) {
@@ -705,19 +701,781 @@ public class Game {
                 String inputAction = scanner.next();
                 actions.add(inputAction);
             }
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             return false;
         }
         return true;
     }
     public void gameMove(){
-        for (int i = 3; i < actions.size() + 3; i++) {
-            if (i % 2 == 0) {
+        boolean ifNext = true;
+        for (int i = 0; i < actions.size(); i++) {
+            if (ifNext) {
                 int actiona = 0;
                 int actionb = 0;
                 int actionc = 0;
                 int actiond = 0;
-                char[] actionToCharArray = actions.get(i - 3).toCharArray();
+                char[] actionToCharArray = actions.get(i).toCharArray();
+                String actionToCharArray1 = new String(actionToCharArray, 0, 1);
+                String actionToCharArray2 = new String(actionToCharArray, 1, 1);
+                String actionToCharArray3 = new String(actionToCharArray, 2, 1);
+                String actionToCharArray4 = new String(actionToCharArray, 3, 1);
+                switch (actionToCharArray2) {
+                    case "一":
+                        actionb = 8;
+                        break;
+                    case "二":
+                        actionb = 7;
+                        break;
+                    case "三":
+                        actionb = 6;
+                        break;
+                    case "四":
+                        actionb = 5;
+                        break;
+                    case "五":
+                        actionb = 4;
+                        break;
+                    case "六":
+                        actionb = 3;
+                        break;
+                    case "七":
+                        actionb = 2;
+                        break;
+                    case "八":
+                        actionb = 1;
+                        break;
+                    case "九":
+                        actionb = 0;
+                        break;
+                    default:
+                        break;
+                }
+                int actionToCharArray1If = 0;
+                switch (actionToCharArray1) {
+                    case "炮":
+                        actionToCharArray1If = 13;
+                        break;
+                    case "马":
+                        actionToCharArray1If = 9;
+                        break;
+                    case "车":
+                        actionToCharArray1If = 8;
+                        break;
+                    case "相":
+                        actionToCharArray1If = 10;
+                        break;
+                    case "兵":
+                        actionToCharArray1If = 14;
+                        break;
+                    case "仕":
+                        actionToCharArray1If = 11;
+                        break;
+                    case "帅":
+                        actionToCharArray1If = 12;
+                        break;
+                    default:
+                        break;
+                }
+                boolean ifFind = true;
+                for (int paoi = 0; paoi < chessBoard.length; paoi++) {
+                    if (chessBoard[paoi][actionb] == actionToCharArray1If) {
+                        actiona = paoi;
+                        ifFind = false;
+                        break;
+                    }
+                }
+                if(ifFind){
+                    System.out.println((i+1)+". error");
+                    i++;
+                    System.out.println((i+1)+". skip");
+                    continue;}
+                if (actionToCharArray1If == 8) {
+                    if (actionToCharArray3.equals("进")) {
+                        switch (actionToCharArray4) {
+                            case "一":
+                                actiond = actionb;
+                                actionc = actiona - 1;
+                                break;
+                            case "二":
+                                actiond = actionb;
+                                actionc = actiona - 2;
+                                break;
+                            case "三":
+                                actiond = actionb;
+                                actionc = actiona - 3;
+                                break;
+                            case "四":
+                                actiond = actionb;
+                                actionc = actiona - 4;
+                                break;
+                            case "五":
+                                actiond = actionb;
+                                actionc = actiona - 5;
+                                break;
+                            case "六":
+                                actiond = actionb;
+                                actionc = actiona - 6;
+                                break;
+                            case "七":
+                                actiond = actionb;
+                                actionc = actiona - 7;
+                                break;
+                            case "八":
+                                actiond = actionb;
+                                actionc = actiona - 8;
+                                break;
+                            case "九":
+                                actiond = actionb;
+                                actionc = actiona - 9;
+                                break;
+                            default:
+                                break;
+                        }
+                    } else if (actionToCharArray3.equals("平")) {
+                        switch (actionToCharArray4) {
+                            case "一":
+                                actiond = 8;
+                                actionc = actiona;
+                                break;
+                            case "二":
+                                actiond = 7;
+                                actionc = actiona;
+                                break;
+                            case "三":
+                                actiond = 6;
+                                actionc = actiona;
+                                break;
+                            case "四":
+                                actiond = 5;
+                                actionc = actiona;
+                                break;
+                            case "五":
+                                actiond = 4;
+                                actionc = actiona;
+                                break;
+                            case "六":
+                                actiond = 3;
+                                actionc = actiona;
+                                break;
+                            case "七":
+                                actiond = 2;
+                                actionc = actiona;
+                                break;
+                            case "八":
+                                actiond = 1;
+                                actionc = actiona;
+                                break;
+                            case "九":
+                                actiond = 0;
+                                actionc = actiona;
+                                break;
+                            default:
+                                break;
+                        }
+                    } else if (actionToCharArray3.equals("退")) {
+                        switch (actionToCharArray4) {
+                            case "一":
+                                actiond = actionb;
+                                actionc = actiona + 1;
+                                break;
+                            case "二":
+                                actiond = actionb;
+                                actionc = actiona + 2;
+                                break;
+                            case "三":
+                                actiond = actionb;
+                                actionc = actiona + 3;
+                                break;
+                            case "四":
+                                actiond = actionb;
+                                actionc = actiona + 4;
+                                break;
+                            case "五":
+                                actiond = actionb;
+                                actionc = actiona + 5;
+                                break;
+                            case "六":
+                                actiond = actionb;
+                                actionc = actiona + 6;
+                                break;
+                            case "七":
+                                actiond = actionb;
+                                actionc = actiona + 7;
+                                break;
+                            case "八":
+                                actiond = actionb;
+                                actionc = actiona + 8;
+                                break;
+                            case "九":
+                                actiond = actionb;
+                                actionc = actiona + 9;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                } else if (actionToCharArray1If == 9) {
+                    switch (actionToCharArray4) {
+                        case "一":
+                            actiond = 8;
+                            break;
+                        case "二":
+                            actiond = 7;
+                            break;
+                        case "三":
+                            actiond = 6;
+                            break;
+                        case "四":
+                            actiond = 5;
+                            break;
+                        case "五":
+                            actiond = 4;
+                            break;
+                        case "六":
+                            actiond = 3;
+                            break;
+                        case "七":
+                            actiond = 2;
+                            break;
+                        case "八":
+                            actiond = 1;
+                            break;
+                        case "九":
+                            actiond = 0;
+                            break;
+                        default:
+                            break;
+                    }
+                    switch (actionToCharArray3) {
+                        case "进":
+                            if (Math.abs(actiond - actionb) == 1) {
+                                actionc = actiona - 2;
+                                if(chessBoard[actiona-1][actionb]!=0){
+                                    System.out.println((i+1)+". error");
+                                    i++;
+                                    System.out.println((i+1)+". skip");
+                                    continue;}
+                            } else if (Math.abs(actiond - actionb) == 2) {
+                                if(chessBoard[actiona][actionb-1]!=0){
+                                    System.out.println((i+1)+". error");
+                                    i++;
+                                    System.out.println((i+1)+". skip");
+                                    continue;}
+                                if(chessBoard[actiona][actionb+1]!=0){
+                                    System.out.println((i+1)+". error");
+                                    i++;
+                                    System.out.println((i+1)+". skip");
+                                    continue;}
+                                actionc = actiona - 1;
+                            }
+                            break;
+                        case "退":
+                            if (Math.abs(actiond - actionb) == 1) {
+                                actionc = actiona + 2;
+                                if(chessBoard[actiona+1][actionb]!=0){
+                                    System.out.println((i+1)+". error");
+                                    i++;
+                                    System.out.println((i+1)+". skip");
+                                    continue;}
+                            } else if (Math.abs(actiond - actionb) == 2) {
+                                if(chessBoard[actiona][actionb-1]!=0){
+                                    System.out.println((i+1)+". error");
+                                    i++;
+                                    System.out.println((i+1)+". skip");
+                                    continue;}
+                                if(chessBoard[actiona][actionb+1]!=0){
+                                    System.out.println((i+1)+". error");
+                                    i++;
+                                    System.out.println((i+1)+". skip");
+                                    continue;}
+                                actionc = actiona + 1;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                } else if (actionToCharArray1If == 10) {
+                    switch (actionToCharArray4) {
+                        case "一":
+                            actiond = 8;
+                            break;
+                        case "二":
+                            actiond = 7;
+                            break;
+                        case "三":
+                            actiond = 6;
+                            break;
+                        case "四":
+                            actiond = 5;
+                            break;
+                        case "五":
+                            actiond = 4;
+                            break;
+                        case "六":
+                            actiond = 3;
+                            break;
+                        case "七":
+                            actiond = 2;
+                            break;
+                        case "八":
+                            actiond = 1;
+                            break;
+                        case "九":
+                            actiond = 0;
+                            break;
+                        default:
+                            break;
+                    }
+                    switch (actionToCharArray3) {
+                        case "进":
+                            if (Math.abs(actiond - actionb) == 2) {
+                                actionc = actiona - 2;
+                            }
+                            break;
+                        case "退":
+                            if (Math.abs(actiond - actionb) == 2) {
+                                actionc = actiona + 2;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                } else if (actionToCharArray1If == 11) {
+                    switch (actionToCharArray4) {
+                        case "一":
+                            actiond = 8;
+                            break;
+                        case "二":
+                            actiond = 7;
+                            break;
+                        case "三":
+                            actiond = 6;
+                            break;
+                        case "四":
+                            actiond = 5;
+                            break;
+                        case "五":
+                            actiond = 4;
+                            break;
+                        case "六":
+                            actiond = 3;
+                            break;
+                        case "七":
+                            actiond = 2;
+                            break;
+                        case "八":
+                            actiond = 1;
+                            break;
+                        case "九":
+                            actiond = 0;
+                            break;
+                        default:
+                            break;
+                    }
+                    switch (actionToCharArray3) {
+                        case "进":
+                            if (Math.abs(actiond - actionb) == 1) {
+                                actionc = actiona - 1;
+                            }
+                            break;
+                        case "退":
+                            if (Math.abs(actiond - actionb) == 1) {
+                                actionc = actiona + 1;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                } else if (actionToCharArray1If == 12) {
+                    if (actionToCharArray3.equals("进")) {
+                        switch (actionToCharArray4) {
+                            case "一":
+                                actiond = actionb;
+                                actionc = actiona - 1;
+                                break;
+                            case "二":
+                                actiond = actionb;
+                                actionc = actiona - 2;
+                            case "三":
+                                actiond = actionb;
+                                actionc = actiona - 3;
+                                break;
+                            case "四":
+                                actiond = actionb;
+                                actionc = actiona - 4;
+                                break;
+                            case "五":
+                                actiond = actionb;
+                                actionc = actiona - 5;
+                                break;
+                            case "六":
+                                actiond = actionb;
+                                actionc = actiona - 6;
+                                break;
+                            case "七":
+                                actiond = actionb;
+                                actionc = actiona - 7;
+                                break;
+                            case "八":
+                                actiond = actionb;
+                                actionc = actiona - 8;
+                                break;
+                            case "九":
+                                actiond = actionb;
+                                actionc = actiona - 9;
+                                break;
+                            default:
+                                break;
+                        }
+                    } else if (actionToCharArray3.equals("平")) {
+                        switch (actionToCharArray4) {
+                            case "一":
+                                actiond = 8;
+                                actionc = actiona;
+                                break;
+                            case "二":
+                                actiond = 7;
+                                actionc = actiona;
+                                break;
+                            case "三":
+                                actiond = 6;
+                                actionc = actiona;
+                                break;
+                            case "四":
+                                actiond = 5;
+                                actionc = actiona;
+                                break;
+                            case "五":
+                                actiond = 4;
+                                actionc = actiona;
+                                break;
+                            case "六":
+                                actiond = 3;
+                                actionc = actiona;
+                                break;
+                            case "七":
+                                actiond = 2;
+                                actionc = actiona;
+                                break;
+                            case "八":
+                                actiond = 1;
+                                actionc = actiona;
+                                break;
+                            case "九":
+                                actiond = 0;
+                                actionc = actiona;
+                                break;
+                            default:
+                                break;
+                        }
+                    } else if (actionToCharArray3.equals("退")) {
+                        switch (actionToCharArray4) {
+                            case "一":
+                                actiond = actionb;
+                                actionc = actiona + 1;
+                                break;
+                            case "二":
+                                actiond = actionb;
+                                actionc = actiona + 2;
+                                break;
+                            case "三":
+                                actiond = actionb;
+                                actionc = actiona + 3;
+                                break;
+                            case "四":
+                                actiond = actionb;
+                                actionc = actiona + 4;
+                                break;
+                            case "五":
+                                actiond = actionb;
+                                actionc = actiona + 5;
+                                break;
+                            case "六":
+                                actiond = actionb;
+                                actionc = actiona + 6;
+                                break;
+                            case "七":
+                                actiond = actionb;
+                                actionc = actiona + 7;
+                                break;
+                            case "八":
+                                actiond = actionb;
+                                actionc = actiona + 8;
+                                break;
+                            case "九":
+                                actiond = actionb;
+                                actionc = actiona + 9;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                } else if (actionToCharArray1If == 13) {
+                    if (actionToCharArray3.equals("进")) {
+                        switch (actionToCharArray4) {
+                            case "一":
+                                actiond = actionb;
+                                actionc = actiona - 1;
+                                break;
+                            case "二":
+                                actiond = actionb;
+                                actionc = actiona - 2;
+                                break;
+                            case "三":
+                                actiond = actionb;
+                                actionc = actiona - 3;
+                                break;
+                            case "四":
+                                actiond = actionb;
+                                actionc = actiona - 4;
+                                break;
+                            case "五":
+                                actiond = actionb;
+                                actionc = actiona - 5;
+                                break;
+                            case "六":
+                                actiond = actionb;
+                                actionc = actiona - 6;
+                                break;
+                            case "七":
+                                actiond = actionb;
+                                actionc = actiona - 7;
+                                break;
+                            case "八":
+                                actiond = actionb;
+                                actionc = actiona - 8;
+                                break;
+                            case "九":
+                                actiond = actionb;
+                                actionc = actiona - 9;
+                                break;
+                            default:
+                                break;
+                        }
+                    } else if (actionToCharArray3.equals("平")) {
+                        switch (actionToCharArray4) {
+                            case "一":
+                                actiond = 8;
+                                actionc = actiona;
+                                break;
+                            case "二":
+                                actiond = 7;
+                                actionc = actiona;
+                                break;
+                            case "三":
+                                actiond = 6;
+                                actionc = actiona;
+                                break;
+                            case "四":
+                                actiond = 5;
+                                actionc = actiona;
+                                break;
+                            case "五":
+                                actiond = 4;
+                                actionc = actiona;
+                                break;
+                            case "六":
+                                actiond = 3;
+                                actionc = actiona;
+                                break;
+                            case "七":
+                                actiond = 2;
+                                actionc = actiona;
+                                break;
+                            case "八":
+                                actiond = 1;
+                                actionc = actiona;
+                                break;
+                            case "九":
+                                actiond = 0;
+                                actionc = actiona;
+                                break;
+                            default:
+                                break;
+                        }
+                    } else if (actionToCharArray3.equals("退")) {
+                        switch (actionToCharArray4) {
+                            case "一":
+                                actiond = actionb;
+                                actionc = actiona + 1;
+                                break;
+                            case "二":
+                                actiond = actionb;
+                                actionc = actiona + 2;
+                                break;
+                            case "三":
+                                actiond = actionb;
+                                actionc = actiona + 3;
+                                break;
+                            case "四":
+                                actiond = actionb;
+                                actionc = actiona + 4;
+                                break;
+                            case "五":
+                                actiond = actionb;
+                                actionc = actiona + 5;
+                                break;
+                            case "六":
+                                actiond = actionb;
+                                actionc = actiona + 6;
+                                break;
+                            case "七":
+                                actiond = actionb;
+                                actionc = actiona + 7;
+                                break;
+                            case "八":
+                                actiond = actionb;
+                                actionc = actiona + 8;
+                                break;
+                            case "九":
+                                actiond = actionb;
+                                actionc = actiona + 9;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                } else if (actionToCharArray1If == 14) {
+
+                    if (actionToCharArray3.equals("进")) {
+                        switch (actionToCharArray4) {
+                            case "一":
+                                actiond = actionb;
+                                actionc = actiona - 1;
+                                break;
+                            case "二":
+                                actiond = actionb;
+                                actionc = actiona - 2;
+                                break;
+                            case "三":
+                                actiond = actionb;
+                                actionc = actiona - 3;
+                                break;
+                            case "四":
+                                actiond = actionb;
+                                actionc = actiona - 4;
+                                break;
+                            case "五":
+                                actiond = actionb;
+                                actionc = actiona - 5;
+                                break;
+                            case "六":
+                                actiond = actionb;
+                                actionc = actiona - 6;
+                                break;
+                            case "七":
+                                actiond = actionb;
+                                actionc = actiona - 7;
+                                break;
+                            case "八":
+                                actiond = actionb;
+                                actionc = actiona - 8;
+                                break;
+                            case "九":
+                                actiond = actionb;
+                                actionc = actiona - 9;
+                                break;
+                            default:
+                                break;
+                        }
+                    } else if (actionToCharArray3.equals("平")) {
+                        switch (actionToCharArray4) {
+                            case "一":
+                                actiond = 8;
+                                actionc = actiona;
+                                break;
+                            case "二":
+                                actiond = 7;
+                                actionc = actiona;
+                                break;
+                            case "三":
+                                actiond = 6;
+                                actionc = actiona;
+                                break;
+                            case "四":
+                                actiond = 5;
+                                actionc = actiona;
+                                break;
+                            case "五":
+                                actiond = 4;
+                                actionc = actiona;
+                                break;
+                            case "六":
+                                actiond = 3;
+                                actionc = actiona;
+                                break;
+                            case "七":
+                                actiond = 2;
+                                actionc = actiona;
+                                break;
+                            case "八":
+                                actiond = 1;
+                                actionc = actiona;
+                                break;
+                            case "九":
+                                actiond = 0;
+                                actionc = actiona;
+                                break;
+                            default:
+                                break;
+                        }
+                    } else if (actionToCharArray3.equals("退")) {
+                        switch (actionToCharArray4) {
+                            case "一":
+                                actiond = actionb;
+                                actionc = actiona + 1;
+                                break;
+                            case "二":
+                                actiond = actionb;
+                                actionc = actiona + 2;
+                                break;
+                            case "三":
+                                actiond = actionb;
+                                actionc = actiona + 3;
+                                break;
+                            case "四":
+                                actiond = actionb;
+                                actionc = actiona + 4;
+                                break;
+                            case "五":
+                                actiond = actionb;
+                                actionc = actiona + 5;
+                                break;
+                            case "六":
+                                actiond = actionb;
+                                actionc = actiona + 6;
+                                break;
+                            case "七":
+                                actiond = actionb;
+                                actionc = actiona + 7;
+                                break;
+                            case "八":
+                                actiond = actionb;
+                                actionc = actiona + 8;
+                                break;
+                            case "九":
+                                actiond = actionb;
+                                actionc = actiona + 9;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                if (chessBoard[actionc][actiond] == 5) {
+                    System.out.println((i+1)+". 红方胜");
+                    break;
+                }
+                playerRedMove(actiona, actionb, actionc, actiond);
+                System.out.println((i+1)+". ok");
+                ifNext = false;
+            }
+            else{
+                int actiona = 0;
+                int actionb = 0;
+                int actionc = 0;
+                int actiond = 0;
+                char[] actionToCharArray = actions.get(i).toCharArray();
                 String actionToCharArray1 = new String(actionToCharArray, 0, 1);
                 String actionToCharArray2 = new String(actionToCharArray, 1, 1);
                 String actionToCharArray3 = new String(actionToCharArray, 2, 1);
@@ -779,12 +1537,19 @@ public class Game {
                     default:
                         break;
                 }
+                boolean ifFind = true;
                 for (int paoi = 0; paoi < chessBoard.length; paoi++) {
                     if (chessBoard[paoi][actionb] == actionToCharArray1If) {
                         actiona = paoi;
+                        ifFind = false;
                         break;
                     }
                 }
+                if(ifFind){
+                    System.out.println((i+1)+". error");
+                    i++;
+                    System.out.println((i+1)+". skip");
+                    continue;}
                 if (actionToCharArray1If == 1) {
                     if (actionToCharArray3.equals("进")) {
                         switch (actionToCharArray4) {
@@ -1428,729 +2193,13 @@ public class Game {
                         }
                     }
                 }
+                if (chessBoard[actionc][actiond] == 5) {
+                    System.out.println((i+1)+". 黑方胜");
+                    break;
+                }
                 playerBlackMove(actiona, actionb, actionc, actiond);
-                printChessBoard();
-                System.out.println(actions.get(i - 3));
-            }
-            if (i % 2 == 1) {
-                int actiona = 0;
-                int actionb = 0;
-                int actionc = 0;
-                int actiond = 0;
-                char[] actionToCharArray = actions.get(i - 3).toCharArray();
-                String actionToCharArray1 = new String(actionToCharArray, 0, 1);
-                String actionToCharArray2 = new String(actionToCharArray, 1, 1);
-                String actionToCharArray3 = new String(actionToCharArray, 2, 1);
-                String actionToCharArray4 = new String(actionToCharArray, 3, 1);
-                switch (actionToCharArray2) {
-                    case "一":
-                        actionb = 8;
-                        break;
-                    case "二":
-                        actionb = 7;
-                        break;
-                    case "三":
-                        actionb = 6;
-                        break;
-                    case "四":
-                        actionb = 5;
-                        break;
-                    case "五":
-                        actionb = 4;
-                        break;
-                    case "六":
-                        actionb = 3;
-                        break;
-                    case "七":
-                        actionb = 2;
-                        break;
-                    case "八":
-                        actionb = 1;
-                        break;
-                    case "九":
-                        actionb = 0;
-                        break;
-                    default:
-                        break;
-                }
-                int actionToCharArray1If = 0;
-                switch (actionToCharArray1) {
-                    case "炮":
-                        actionToCharArray1If = 13;
-                        break;
-                    case "马":
-                        actionToCharArray1If = 9;
-                        break;
-                    case "车":
-                        actionToCharArray1If = 8;
-                        break;
-                    case "相":
-                        actionToCharArray1If = 10;
-                        break;
-                    case "兵":
-                        actionToCharArray1If = 14;
-                        break;
-                    case "仕":
-                        actionToCharArray1If = 11;
-                        break;
-                    case "帅":
-                        actionToCharArray1If = 12;
-                        break;
-                    default:
-                        break;
-                }
-                for (int paoi = 0; paoi < chessBoard.length; paoi++) {
-                    if (chessBoard[paoi][actionb] == actionToCharArray1If) {
-                        actiona = paoi;
-                        break;
-                    }
-                }
-                if (actionToCharArray1If == 8) {
-                    if (actionToCharArray3.equals("进")) {
-                        switch (actionToCharArray4) {
-                            case "一":
-                                actiond = actionb;
-                                actionc = actiona - 1;
-                                break;
-                            case "二":
-                                actiond = actionb;
-                                actionc = actiona - 2;
-                                break;
-                            case "三":
-                                actiond = actionb;
-                                actionc = actiona - 3;
-                                break;
-                            case "四":
-                                actiond = actionb;
-                                actionc = actiona - 4;
-                                break;
-                            case "五":
-                                actiond = actionb;
-                                actionc = actiona - 5;
-                                break;
-                            case "六":
-                                actiond = actionb;
-                                actionc = actiona - 6;
-                                break;
-                            case "七":
-                                actiond = actionb;
-                                actionc = actiona - 7;
-                                break;
-                            case "八":
-                                actiond = actionb;
-                                actionc = actiona - 8;
-                                break;
-                            case "九":
-                                actiond = actionb;
-                                actionc = actiona - 9;
-                                break;
-                            default:
-                                break;
-                        }
-                    } else if (actionToCharArray3.equals("平")) {
-                        switch (actionToCharArray4) {
-                            case "一":
-                                actiond = 8;
-                                actionc = actiona;
-                                break;
-                            case "二":
-                                actiond = 7;
-                                actionc = actiona;
-                                break;
-                            case "三":
-                                actiond = 6;
-                                actionc = actiona;
-                                break;
-                            case "四":
-                                actiond = 5;
-                                actionc = actiona;
-                                break;
-                            case "五":
-                                actiond = 4;
-                                actionc = actiona;
-                                break;
-                            case "六":
-                                actiond = 3;
-                                actionc = actiona;
-                                break;
-                            case "七":
-                                actiond = 2;
-                                actionc = actiona;
-                                break;
-                            case "八":
-                                actiond = 1;
-                                actionc = actiona;
-                                break;
-                            case "九":
-                                actiond = 0;
-                                actionc = actiona;
-                                break;
-                            default:
-                                break;
-                        }
-                    } else if (actionToCharArray3.equals("退")) {
-                        switch (actionToCharArray4) {
-                            case "一":
-                                actiond = actionb;
-                                actionc = actiona + 1;
-                                break;
-                            case "二":
-                                actiond = actionb;
-                                actionc = actiona + 2;
-                                break;
-                            case "三":
-                                actiond = actionb;
-                                actionc = actiona + 3;
-                                break;
-                            case "四":
-                                actiond = actionb;
-                                actionc = actiona + 4;
-                                break;
-                            case "五":
-                                actiond = actionb;
-                                actionc = actiona + 5;
-                                break;
-                            case "六":
-                                actiond = actionb;
-                                actionc = actiona + 6;
-                                break;
-                            case "七":
-                                actiond = actionb;
-                                actionc = actiona + 7;
-                                break;
-                            case "八":
-                                actiond = actionb;
-                                actionc = actiona + 8;
-                                break;
-                            case "九":
-                                actiond = actionb;
-                                actionc = actiona + 9;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                } else if (actionToCharArray1If == 9) {
-                    switch (actionToCharArray4) {
-                        case "一":
-                            actiond = 8;
-                            break;
-                        case "二":
-                            actiond = 7;
-                            break;
-                        case "三":
-                            actiond = 6;
-                            break;
-                        case "四":
-                            actiond = 5;
-                            break;
-                        case "五":
-                            actiond = 4;
-                            break;
-                        case "六":
-                            actiond = 3;
-                            break;
-                        case "七":
-                            actiond = 2;
-                            break;
-                        case "八":
-                            actiond = 1;
-                            break;
-                        case "九":
-                            actiond = 0;
-                            break;
-                        default:
-                            break;
-                    }
-                    switch (actionToCharArray3) {
-                        case "进":
-                            if (Math.abs(actiond - actionb) == 1) {
-                                actionc = actiona - 2;
-                            } else if (Math.abs(actiond - actionb) == 2) {
-                                actionc = actiona - 1;
-                            }
-                            break;
-                        case "退":
-                            if (Math.abs(actiond - actionb) == 1) {
-                                actionc = actiona + 2;
-                            } else if (Math.abs(actiond - actionb) == 2) {
-                                actionc = actiona + 1;
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-                } else if (actionToCharArray1If == 10) {
-                    switch (actionToCharArray4) {
-                        case "一":
-                            actiond = 8;
-                            break;
-                        case "二":
-                            actiond = 7;
-                            break;
-                        case "三":
-                            actiond = 6;
-                            break;
-                        case "四":
-                            actiond = 5;
-                            break;
-                        case "五":
-                            actiond = 4;
-                            break;
-                        case "六":
-                            actiond = 3;
-                            break;
-                        case "七":
-                            actiond = 2;
-                            break;
-                        case "八":
-                            actiond = 1;
-                            break;
-                        case "九":
-                            actiond = 0;
-                            break;
-                        default:
-                            break;
-                    }
-                    switch (actionToCharArray3) {
-                        case "进":
-                            if (Math.abs(actiond - actionb) == 2) {
-                                actionc = actiona - 2;
-                            }
-                            break;
-                        case "退":
-                            if (Math.abs(actiond - actionb) == 2) {
-                                actionc = actiona + 2;
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-                } else if (actionToCharArray1If == 11) {
-                    switch (actionToCharArray4) {
-                        case "一":
-                            actiond = 8;
-                            break;
-                        case "二":
-                            actiond = 7;
-                            break;
-                        case "三":
-                            actiond = 6;
-                            break;
-                        case "四":
-                            actiond = 5;
-                            break;
-                        case "五":
-                            actiond = 4;
-                            break;
-                        case "六":
-                            actiond = 3;
-                            break;
-                        case "七":
-                            actiond = 2;
-                            break;
-                        case "八":
-                            actiond = 1;
-                            break;
-                        case "九":
-                            actiond = 0;
-                            break;
-                        default:
-                            break;
-                    }
-                    switch (actionToCharArray3) {
-                        case "进":
-                            if (Math.abs(actiond - actionb) == 1) {
-                                actionc = actiona - 1;
-                            }
-                            break;
-                        case "退":
-                            if (Math.abs(actiond - actionb) == 1) {
-                                actionc = actiona + 1;
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-                } else if (actionToCharArray1If == 12) {
-                    if (actionToCharArray3.equals("进")) {
-                        switch (actionToCharArray4) {
-                            case "一":
-                                actiond = actionb;
-                                actionc = actiona - 1;
-                                break;
-                            case "二":
-                                actiond = actionb;
-                                actionc = actiona - 2;
-                            case "三":
-                                actiond = actionb;
-                                actionc = actiona - 3;
-                                break;
-                            case "四":
-                                actiond = actionb;
-                                actionc = actiona - 4;
-                                break;
-                            case "五":
-                                actiond = actionb;
-                                actionc = actiona - 5;
-                                break;
-                            case "六":
-                                actiond = actionb;
-                                actionc = actiona - 6;
-                                break;
-                            case "七":
-                                actiond = actionb;
-                                actionc = actiona - 7;
-                                break;
-                            case "八":
-                                actiond = actionb;
-                                actionc = actiona - 8;
-                                break;
-                            case "九":
-                                actiond = actionb;
-                                actionc = actiona - 9;
-                                break;
-                            default:
-                                break;
-                        }
-                    } else if (actionToCharArray3.equals("平")) {
-                        switch (actionToCharArray4) {
-                            case "一":
-                                actiond = 8;
-                                actionc = actiona;
-                                break;
-                            case "二":
-                                actiond = 7;
-                                actionc = actiona;
-                                break;
-                            case "三":
-                                actiond = 6;
-                                actionc = actiona;
-                                break;
-                            case "四":
-                                actiond = 5;
-                                actionc = actiona;
-                                break;
-                            case "五":
-                                actiond = 4;
-                                actionc = actiona;
-                                break;
-                            case "六":
-                                actiond = 3;
-                                actionc = actiona;
-                                break;
-                            case "七":
-                                actiond = 2;
-                                actionc = actiona;
-                                break;
-                            case "八":
-                                actiond = 1;
-                                actionc = actiona;
-                                break;
-                            case "九":
-                                actiond = 0;
-                                actionc = actiona;
-                                break;
-                            default:
-                                break;
-                        }
-                    } else if (actionToCharArray3.equals("退")) {
-                        switch (actionToCharArray4) {
-                            case "一":
-                                actiond = actionb;
-                                actionc = actiona + 1;
-                                break;
-                            case "二":
-                                actiond = actionb;
-                                actionc = actiona + 2;
-                                break;
-                            case "三":
-                                actiond = actionb;
-                                actionc = actiona + 3;
-                                break;
-                            case "四":
-                                actiond = actionb;
-                                actionc = actiona + 4;
-                                break;
-                            case "五":
-                                actiond = actionb;
-                                actionc = actiona + 5;
-                                break;
-                            case "六":
-                                actiond = actionb;
-                                actionc = actiona + 6;
-                                break;
-                            case "七":
-                                actiond = actionb;
-                                actionc = actiona + 7;
-                                break;
-                            case "八":
-                                actiond = actionb;
-                                actionc = actiona + 8;
-                                break;
-                            case "九":
-                                actiond = actionb;
-                                actionc = actiona + 9;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                } else if (actionToCharArray1If == 13) {
-                    if (actionToCharArray3.equals("进")) {
-                        switch (actionToCharArray4) {
-                            case "一":
-                                actiond = actionb;
-                                actionc = actiona - 1;
-                                break;
-                            case "二":
-                                actiond = actionb;
-                                actionc = actiona - 2;
-                                break;
-                            case "三":
-                                actiond = actionb;
-                                actionc = actiona - 3;
-                                break;
-                            case "四":
-                                actiond = actionb;
-                                actionc = actiona - 4;
-                                break;
-                            case "五":
-                                actiond = actionb;
-                                actionc = actiona - 5;
-                                break;
-                            case "六":
-                                actiond = actionb;
-                                actionc = actiona - 6;
-                                break;
-                            case "七":
-                                actiond = actionb;
-                                actionc = actiona - 7;
-                                break;
-                            case "八":
-                                actiond = actionb;
-                                actionc = actiona - 8;
-                                break;
-                            case "九":
-                                actiond = actionb;
-                                actionc = actiona - 9;
-                                break;
-                            default:
-                                break;
-                        }
-                    } else if (actionToCharArray3.equals("平")) {
-                        switch (actionToCharArray4) {
-                            case "一":
-                                actiond = 8;
-                                actionc = actiona;
-                                break;
-                            case "二":
-                                actiond = 7;
-                                actionc = actiona;
-                                break;
-                            case "三":
-                                actiond = 6;
-                                actionc = actiona;
-                                break;
-                            case "四":
-                                actiond = 5;
-                                actionc = actiona;
-                                break;
-                            case "五":
-                                actiond = 4;
-                                actionc = actiona;
-                                break;
-                            case "六":
-                                actiond = 3;
-                                actionc = actiona;
-                                break;
-                            case "七":
-                                actiond = 2;
-                                actionc = actiona;
-                                break;
-                            case "八":
-                                actiond = 1;
-                                actionc = actiona;
-                                break;
-                            case "九":
-                                actiond = 0;
-                                actionc = actiona;
-                                break;
-                            default:
-                                break;
-                        }
-                    } else if (actionToCharArray3.equals("退")) {
-                        switch (actionToCharArray4) {
-                            case "一":
-                                actiond = actionb;
-                                actionc = actiona + 1;
-                                break;
-                            case "二":
-                                actiond = actionb;
-                                actionc = actiona + 2;
-                                break;
-                            case "三":
-                                actiond = actionb;
-                                actionc = actiona + 3;
-                                break;
-                            case "四":
-                                actiond = actionb;
-                                actionc = actiona + 4;
-                                break;
-                            case "五":
-                                actiond = actionb;
-                                actionc = actiona + 5;
-                                break;
-                            case "六":
-                                actiond = actionb;
-                                actionc = actiona + 6;
-                                break;
-                            case "七":
-                                actiond = actionb;
-                                actionc = actiona + 7;
-                                break;
-                            case "八":
-                                actiond = actionb;
-                                actionc = actiona + 8;
-                                break;
-                            case "九":
-                                actiond = actionb;
-                                actionc = actiona + 9;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                } else if (actionToCharArray1If == 14) {
-
-                    if (actionToCharArray3.equals("进")) {
-                        switch (actionToCharArray4) {
-                            case "一":
-                                actiond = actionb;
-                                actionc = actiona - 1;
-                                break;
-                            case "二":
-                                actiond = actionb;
-                                actionc = actiona - 2;
-                                break;
-                            case "三":
-                                actiond = actionb;
-                                actionc = actiona - 3;
-                                break;
-                            case "四":
-                                actiond = actionb;
-                                actionc = actiona - 4;
-                                break;
-                            case "五":
-                                actiond = actionb;
-                                actionc = actiona - 5;
-                                break;
-                            case "六":
-                                actiond = actionb;
-                                actionc = actiona - 6;
-                                break;
-                            case "七":
-                                actiond = actionb;
-                                actionc = actiona - 7;
-                                break;
-                            case "八":
-                                actiond = actionb;
-                                actionc = actiona - 8;
-                                break;
-                            case "九":
-                                actiond = actionb;
-                                actionc = actiona - 9;
-                                break;
-                            default:
-                                break;
-                        }
-                    } else if (actionToCharArray3.equals("平")) {
-                        switch (actionToCharArray4) {
-                            case "一":
-                                actiond = 8;
-                                actionc = actiona;
-                                break;
-                            case "二":
-                                actiond = 7;
-                                actionc = actiona;
-                                break;
-                            case "三":
-                                actiond = 6;
-                                actionc = actiona;
-                                break;
-                            case "四":
-                                actiond = 5;
-                                actionc = actiona;
-                                break;
-                            case "五":
-                                actiond = 4;
-                                actionc = actiona;
-                                break;
-                            case "六":
-                                actiond = 3;
-                                actionc = actiona;
-                                break;
-                            case "七":
-                                actiond = 2;
-                                actionc = actiona;
-                                break;
-                            case "八":
-                                actiond = 1;
-                                actionc = actiona;
-                                break;
-                            case "九":
-                                actiond = 0;
-                                actionc = actiona;
-                                break;
-                            default:
-                                break;
-                        }
-                    } else if (actionToCharArray3.equals("退")) {
-                        switch (actionToCharArray4) {
-                            case "一":
-                                actiond = actionb;
-                                actionc = actiona + 1;
-                                break;
-                            case "二":
-                                actiond = actionb;
-                                actionc = actiona + 2;
-                                break;
-                            case "三":
-                                actiond = actionb;
-                                actionc = actiona + 3;
-                                break;
-                            case "四":
-                                actiond = actionb;
-                                actionc = actiona + 4;
-                                break;
-                            case "五":
-                                actiond = actionb;
-                                actionc = actiona + 5;
-                                break;
-                            case "六":
-                                actiond = actionb;
-                                actionc = actiona + 6;
-                                break;
-                            case "七":
-                                actiond = actionb;
-                                actionc = actiona + 7;
-                                break;
-                            case "八":
-                                actiond = actionb;
-                                actionc = actiona + 8;
-                                break;
-                            case "九":
-                                actiond = actionb;
-                                actionc = actiona + 9;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-                playerRedMove(actiona, actionb, actionc, actiond);
-                printChessBoard();
-                System.out.println(actions.get(i - 3));
+                System.out.println((i+1)+". ok");
+                ifNext = true;
             }
 
         }
