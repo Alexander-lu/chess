@@ -23,7 +23,7 @@ public class Game {
 
     public static void main(String[] args) {
         Game a = new Game();
-        a.loadActions("src/main/resources/input12.txt");
+        a.loadActions("src/main/resources/input5148.txt");
         a.printChessBoard();
         System.out.println("");
         System.out.println(a.actions);
@@ -1484,16 +1484,16 @@ public class Game {
                     case "车":
                         actionToCharArray1If = 8;
                         break;
-                    case "象":
+                    case "相":
                         actionToCharArray1If = 10;
                         break;
                     case "兵":
                         actionToCharArray1If = 14;
                         break;
-                    case "士":
+                    case "仕":
                         actionToCharArray1If = 11;
                         break;
-                    case "将":
+                    case "帅":
                         actionToCharArray1If = 12;
                         break;
                     default:
