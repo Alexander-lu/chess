@@ -2215,6 +2215,18 @@ public class Game {
      * 功能：判断从(a,b)能否移动到（c,d）
      */
     public boolean isAbleToMove(int a, int b, int c, int d){
+        if(a<0 | c>=chessBoard[0].length){
+            return false;
+        }
+        if(b<0 | c>=chessBoard.length){
+            return false;
+        }
+        if(c<0 | c>=chessBoard[0].length){
+            return false;
+        }
+        if(d<0 | c>=chessBoard.length){
+            return false;
+        }
         //不能吃自己伙的棋子
         switch (chessBoard[a][b]) {
             case 0:
