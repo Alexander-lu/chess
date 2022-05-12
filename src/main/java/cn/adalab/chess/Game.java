@@ -24,6 +24,7 @@ public class Game {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Game a = new Game();
+//        a.loadActions("src/main/resources/input2.txt");
         a.loadActions(sc);
         a.gameMove();
     }
@@ -87,616 +88,78 @@ public class Game {
     public void playerRedMove(int a, int b, int c, int d) {
         switch (chessBoard[a][b]) {
             case 8:
-                if (chessBoard[c][d] == 0) {
                     chessBoard[c][d] = 8;
                     chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 8) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 9) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 10) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 11) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 12) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 13) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 14) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 7) {
-                    chessBoard[c][d] = 8;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 6) {
-                    chessBoard[c][d] = 8;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 5) {
-                    chessBoard[c][d] = 8;
-                    chessBoard[a][b] = 0;
-                    System.out.println("win");
-                } else if (chessBoard[c][d] == 4) {
-                    chessBoard[c][d] = 8;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 3) {
-                    chessBoard[c][d] = 8;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 2) {
-                    chessBoard[c][d] = 8;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 1) {
-                    chessBoard[c][d] = 8;
-                    chessBoard[a][b] = 0;
-                }
-                break;
+                    break;
             case 9:
-                if (chessBoard[c][d] == 0) {
-                    chessBoard[c][d] = 9;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 8) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 9) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 10) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 11) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 12) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 13) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 14) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 7) {
-                    chessBoard[c][d] = 9;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 6) {
-                    chessBoard[c][d] = 9;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 5) {
-                    chessBoard[c][d] = 9;
-                    chessBoard[a][b] = 0;
-                    System.out.println("win");
-                } else if (chessBoard[c][d] == 4) {
-                    chessBoard[c][d] = 9;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 3) {
-                    chessBoard[c][d] = 9;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 2) {
-                    chessBoard[c][d] = 9;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 1) {
-                    chessBoard[c][d] = 9;
-                    chessBoard[a][b] = 0;
-                }
+                chessBoard[c][d] = 9;
+                chessBoard[a][b] = 0;
                 break;
             case 10:
-                if (chessBoard[c][d] == 0) {
-                    chessBoard[c][d] = 10;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 8) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 9) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 10) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 11) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 12) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 13) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 14) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 7) {
-                    chessBoard[c][d] = 10;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 6) {
-                    chessBoard[c][d] = 10;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 5) {
-                    chessBoard[c][d] = 10;
-                    chessBoard[a][b] = 0;
-                    System.out.println("win");
-                } else if (chessBoard[c][d] == 4) {
-                    chessBoard[c][d] = 10;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 3) {
-                    chessBoard[c][d] = 10;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 2) {
-                    chessBoard[c][d] = 10;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 1) {
-                    chessBoard[c][d] = 10;
-                    chessBoard[a][b] = 0;
-                }
+                chessBoard[c][d] = 10;
+                chessBoard[a][b] = 0;
                 break;
             case 11:
-                if (chessBoard[c][d] == 0) {
-                    chessBoard[c][d] = 11;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 8) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 9) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 10) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 11) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 12) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 13) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 14) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 7) {
-                    chessBoard[c][d] = 11;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 6) {
-                    chessBoard[c][d] = 11;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 5) {
-                    chessBoard[c][d] = 11;
-                    chessBoard[a][b] = 0;
-                    System.out.println("win");
-                } else if (chessBoard[c][d] == 4) {
-                    chessBoard[c][d] = 11;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 3) {
-                    chessBoard[c][d] = 11;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 2) {
-                    chessBoard[c][d] = 11;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 1) {
-                    chessBoard[c][d] = 11;
-                    chessBoard[a][b] = 0;
-                }
+                chessBoard[c][d] = 11;
+                chessBoard[a][b] = 0;
                 break;
             case 12:
-                if (chessBoard[c][d] == 0) {
-                    chessBoard[c][d] = 12;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 8) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 9) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 10) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 11) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 12) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 13) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 14) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 7) {
-                    chessBoard[c][d] = 12;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 6) {
-                    chessBoard[c][d] = 12;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 5) {
-                    chessBoard[c][d] = 12;
-                    chessBoard[a][b] = 0;
-                    System.out.println("win");
-                } else if (chessBoard[c][d] == 4) {
-                    chessBoard[c][d] = 12;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 3) {
-                    chessBoard[c][d] = 12;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 2) {
-                    chessBoard[c][d] = 12;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 1) {
-                    chessBoard[c][d] = 12;
-                    chessBoard[a][b] = 0;
-                }
+                chessBoard[c][d] = 12;
+                chessBoard[a][b] = 0;
                 break;
             case 13:
-                if (chessBoard[c][d] == 0) {
-                    chessBoard[c][d] = 13;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 8) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 9) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 10) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 11) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 12) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 13) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 14) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 7) {
-                    chessBoard[c][d] = 13;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 6) {
-                    chessBoard[c][d] = 13;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 5) {
-                    chessBoard[c][d] = 13;
-                    chessBoard[a][b] = 0;
-                    System.out.println("win");
-                } else if (chessBoard[c][d] == 4) {
-                    chessBoard[c][d] = 13;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 3) {
-                    chessBoard[c][d] = 13;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 2) {
-                    chessBoard[c][d] = 13;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 1) {
-                    chessBoard[c][d] = 13;
-                    chessBoard[a][b] = 0;
-                }
+                chessBoard[c][d] = 13;
+                chessBoard[a][b] = 0;
                 break;
             case 14:
-                if (chessBoard[c][d] == 0) {
-                    chessBoard[c][d] = 14;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 8) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 9) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 10) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 11) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 12) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 13) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 14) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 7) {
-                    chessBoard[c][d] = 14;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 6) {
-                    chessBoard[c][d] = 14;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 5) {
-                    chessBoard[c][d] = 14;
-                    chessBoard[a][b] = 0;
-                    System.out.println("win");
-                } else if (chessBoard[c][d] == 4) {
-                    chessBoard[c][d] = 14;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 3) {
-                    chessBoard[c][d] = 14;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 2) {
-                    chessBoard[c][d] = 14;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 1) {
-                    chessBoard[c][d] = 14;
-                    chessBoard[a][b] = 0;
-                }
+                chessBoard[c][d] = 14;
+                chessBoard[a][b] = 0;
                 break;
             default:
                 break;
         }
-
+//printChessBoard();
     }
 
     /**
      * 功能：黑方移动棋子
      */
     public void playerBlackMove(int a, int b, int c, int d) {
-        int count = 0;
         switch (chessBoard[a][b]) {
             case 1:
-                count = 1;
-                if (chessBoard[c][d] == 0) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 1) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 2) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 3) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 4) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 5) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 6) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 7) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 8) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 9) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 10) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                    System.out.println("win");
-                } else if (chessBoard[c][d] == 11) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 12) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 13) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 14) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                }
+                chessBoard[c][d] = 1;
+                chessBoard[a][b] = 0;
                 break;
             case 2:
-                count = 2;
-                if (chessBoard[c][d] == 0) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 1) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 2) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 3) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 4) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 5) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 6) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 7) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 8) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 9) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 10) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                    System.out.println("win");
-                } else if (chessBoard[c][d] == 11) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 12) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 13) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 14) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                }
+                chessBoard[c][d] = 2;
+                chessBoard[a][b] = 0;
                 break;
             case 3:
-                count = 3;
-                if (chessBoard[c][d] == 0) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 1) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 2) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 3) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 4) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 5) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 6) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 7) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 8) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 9) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 10) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                    System.out.println("win");
-                } else if (chessBoard[c][d] == 11) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 12) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 13) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 14) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                }
+                chessBoard[c][d] = 3;
+                chessBoard[a][b] = 0;
                 break;
             case 4:
-                count = 4;
-                if (chessBoard[c][d] == 0) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 1) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 2) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 3) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 4) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 5) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 6) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 7) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 8) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 9) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 10) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                    System.out.println("win");
-                } else if (chessBoard[c][d] == 11) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 12) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 13) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 14) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                }
+                chessBoard[c][d] = 4;
+                chessBoard[a][b] = 0;
                 break;
             case 5:
-                count = 5;
-                if (chessBoard[c][d] == 0) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 1) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 2) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 3) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 4) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 5) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 6) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 7) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 8) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 9) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 10) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                    System.out.println("win");
-                } else if (chessBoard[c][d] == 11) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 12) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 13) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 14) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                }
+                chessBoard[c][d] = 5;
+                chessBoard[a][b] = 0;
                 break;
             case 6:
-                count = 6;
-                if (chessBoard[c][d] == 0) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 1) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 2) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 3) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 4) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 5) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 6) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 7) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 8) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 9) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 10) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                    System.out.println("win");
-                } else if (chessBoard[c][d] == 11) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 12) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 13) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 14) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                }
+                chessBoard[c][d] = 6;
+                chessBoard[a][b] = 0;
                 break;
             case 7:
-                count = 7;
-                if (chessBoard[c][d] == 0) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 1) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 2) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 3) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 4) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 5) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 6) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 7) {
-                    System.out.println("错误");
-                } else if (chessBoard[c][d] == 8) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 9) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 10) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                    System.out.println("win");
-                } else if (chessBoard[c][d] == 11) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 12) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 13) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                } else if (chessBoard[c][d] == 14) {
-                    chessBoard[c][d] = count;
-                    chessBoard[a][b] = 0;
-                }
+                chessBoard[c][d] = 7;
+                chessBoard[a][b] = 0;
                 break;
             default:
                 break;
         }
+//        printChessBoard();
     }
+
 
     /**
      * 功能：读取文件获取Actions
@@ -715,6 +178,23 @@ public class Game {
         }
         return true;
     }
+
+//    public boolean loadActions(String path) {
+//        try {
+//            Scanner scanner = new Scanner(new File(path));
+//            int nAction = scanner.nextInt();
+//            // 读取所有地点
+//            for (int i = 0; i < nAction; i++) {
+//                String inputBianHao = scanner.next();
+//                String inputAction = scanner.next();
+//                actions.add(inputAction);
+//            }
+//        } catch (FileNotFoundException e) {
+//            return false;
+//        }
+////        System.out.println(actions);
+//        return true;
+//    }
 
     /**
      * 功能：读取文件跑游戏
@@ -919,8 +399,7 @@ public class Game {
                             default:
                                 break;
                         }
-                    }
-                } else if (actionToCharArray1If == 9) {
+                } }else if (actionToCharArray1If == 9) {
                     switch (actionToCharArray4) {
                         case "一":
                             actiond = 8;
@@ -956,51 +435,19 @@ public class Game {
                         case "进":
                             if (Math.abs(actiond - actionb) == 1) {
                                 actionc = actiona - 2;
-                                if (chessBoard[actiona - 1][actionb] != 0) {
-                                    System.out.println((i + 1) + ". error");
-                                    i++;
-                                    System.out.println((i + 1) + ". skip");
-                                    continue;
-                                }
                             } else if (Math.abs(actiond - actionb) == 2) {
-                                if (chessBoard[actiona][actionb - 1] != 0) {
-                                    System.out.println((i + 1) + ". error");
-                                    i++;
-                                    System.out.println((i + 1) + ". skip");
-                                    continue;
-                                }
-                                if (chessBoard[actiona][actionb + 1] != 0) {
-                                    System.out.println((i + 1) + ". error");
-                                    i++;
-                                    System.out.println((i + 1) + ". skip");
-                                    continue;
-                                }
                                 actionc = actiona - 1;
+                            } else{
+                                actionc = 10;
                             }
                             break;
                         case "退":
                             if (Math.abs(actiond - actionb) == 1) {
                                 actionc = actiona + 2;
-                                if (chessBoard[actiona + 1][actionb] != 0) {
-                                    System.out.println((i + 1) + ". error");
-                                    i++;
-                                    System.out.println((i + 1) + ". skip");
-                                    continue;
-                                }
                             } else if (Math.abs(actiond - actionb) == 2) {
-                                if (chessBoard[actiona][actionb - 1] != 0) {
-                                    System.out.println((i + 1) + ". error");
-                                    i++;
-                                    System.out.println((i + 1) + ". skip");
-                                    continue;
-                                }
-                                if (chessBoard[actiona][actionb + 1] != 0) {
-                                    System.out.println((i + 1) + ". error");
-                                    i++;
-                                    System.out.println((i + 1) + ". skip");
-                                    continue;
-                                }
                                 actionc = actiona + 1;
+                            } else{
+                                actionc = 10;
                             }
                             break;
                         default:
@@ -1474,18 +921,19 @@ public class Game {
                         }
                     }
                 }
-                if (chessBoard[actionc][actiond] == 5) {
-                    System.out.println((i + 1) + ". 红方胜");
-                    break;
-                }
+
                 if (isAbleToMove(actiona, actionb, actionc, actiond)) {
-                    if (check()) {
-                        playerRedMove(actiona, actionb, actionc, actiond);
+                    if (chessBoard[actionc][actiond] == 5) {
+                        System.out.println((i + 1) + ". 红方胜");
+                        break;
+                    }
+                    playerRedMove(actiona, actionb, actionc, actiond);
+                    if (checkRed()) {
                         System.out.println((i + 1) + ". ok");
                         ifNext = false;
                     } else {
                         System.out.println((i + 1) + ". 将军");
-                        continue;
+                        ifNext = false;
                     }
                 } else {
                     System.out.println((i + 1) + ". error");
@@ -1493,7 +941,7 @@ public class Game {
                     System.out.println((i + 1) + ". skip");
                     continue;
                 }
-            } else {
+            }else {
                 switch (actionToCharArray2) {
                     case "1":
                         actionb = 0;
@@ -2199,17 +1647,19 @@ public class Game {
                         }
                     }
                 }
-                if (chessBoard[actionc][actiond] == 5) {
-                    System.out.println((i + 1) + ". 黑方胜");
-                    break;
-                }
+
                 if (isAbleToMove(actiona, actionb, actionc, actiond)) {
-                    if (check()) {
-                        playerBlackMove(actiona, actionb, actionc, actiond);
+                    if (chessBoard[actionc][actiond] == 12) {
+                        System.out.println((i + 1) + ". 黑方胜");
+                        break;
+                    }
+                    playerBlackMove(actiona, actionb, actionc, actiond);
+                    if (checkBlack()) {
                         System.out.println((i + 1) + ". ok");
                         ifNext = true;
                     } else {
                         System.out.println((i + 1) + ". 将军");
+                        ifNext = true;
                     }
                 } else {
                     System.out.println((i + 1) + ". error");
@@ -2217,9 +1667,7 @@ public class Game {
                     System.out.println((i + 1) + ". skip");
                 }
             }
-
-        }
-    }
+        }}
 
     /**
      * 功能：判断从(a,b)能否移动到（c,d）
@@ -2228,16 +1676,16 @@ public class Game {
         if (a == c & b == d) {
             return false;
         }
-        if (a < 0 | c >= chessBoard[0].length) {
+        if (a < 0 | c >= 10) {
             return false;
         }
-        if (b < 0 | c >= chessBoard.length) {
+        if (b < 0 | c >= 10) {
             return false;
         }
-        if (c < 0 | c >= chessBoard[0].length) {
+        if (c < 0 | c >= 10) {
             return false;
         }
-        if (d < 0 | c >= chessBoard.length) {
+        if (d < 0 | c >= 10) {
             return false;
         }
         //不能吃自己伙的棋子
@@ -2261,13 +1709,8 @@ public class Game {
                     return false;
                 }
                 //不能走斜线
+                if(c!=a&d!=b){return false;}
                 //竖走
-                if (a == c & b != d) {
-                    return false;
-                }
-                if (b == d & a != b) {
-                    return false;
-                }
                 //判断中间是否有棋子
                 //车往左走
                 if (a == c & b > d) {
@@ -2296,11 +1739,12 @@ public class Game {
                 //车往下走
                 if (b == d & a < c) {
                     for (int i = a + 1; i < c; i++) {
-                        if (chessBoard[a][i] > 0) {
+                        if (chessBoard[i][b] > 0) {
                             return false;
                         }
                     }
                 }
+                return true;
             case 2:
                 if (chessBoard[c][d] == 1) {
                     return false;
@@ -2318,15 +1762,36 @@ public class Game {
                     return false;
                 }
                 //必须走日字格
-
-                //向上跳
-
-
-                //向下跳
-
-                //向左跳
-
-                //向右跳
+                if ((c == a-1 && d == b - 2) || (c == a-2 && d == b-1) || (c == a + 1 && d == b-2) || (c == a +2 && d == b-1) || (c == a-1 && d == b + 2) || (c == a-2 && d == b+1) || (c == a + 1 && d == b+2) || (c == a +2 && d == b+1)) {
+                    //是否堵马脚
+                    if(c == a-1 && d == b - 2){
+                        if(a>=0&&a<=9&&b-1>=0&&b-1<=9){if (chessBoard[a][b-1] > 0) {return false;}}
+                    }
+                    if(c == a-2 && d == b-1){
+                        if(a-1>=0&&a-1<=9&&b>=0&&b<=9){if (chessBoard[a-1][b] > 0) {return false;}}
+                    }
+                    if(c == a + 1 && d == b-2){
+                        if(a>=0&&a<=9&&b-1>=0&&b-1<=9){if (chessBoard[a][b-1] > 0) {return false;}}
+                    }
+                    if(c == a +2 && d == b-1){
+                        if(a+1>=0&&a+1<=9&&b>=0&&b<=9){if (chessBoard[a+1][b] > 0) {return false;}}
+                    }
+                    if(c == a-1 && d == b + 2){
+                        if(a>=0&&a<=9&&b+1>=0&&b+1<=9){if (chessBoard[a][b+1] > 0) {return false;}}
+                    }
+                    if(c == a-2 && d == b+1){
+                        if(a-1>=0&&a-1<=9&&b>=0&&b<=9){if (chessBoard[a-1][b] > 0) {return false;}}
+                    }
+                    if(c == a + 1 && d == b+2){
+                        if(a>=0&&a<=9&&b+1>=0&&b+1<=9){if (chessBoard[a][b+1] > 0) {return false;}}
+                    }
+                    if(c == a +2 && d == b+1){
+                        if(a+1>=0&&a+1<=9&&b>=0&&b<=9){if (chessBoard[a+1][b] > 0) {return false;}}
+                    }
+                    return true;
+                } else {
+                    return false;
+                }
             case 3:
                 if (chessBoard[c][d] == 1) {
                     return false;
@@ -2345,32 +1810,26 @@ public class Game {
                 }
                 //只能往左上左下右上右下跳
                 if ((c == a-2 && d == b - 2) || (c == a-2 && d == b+2) || (c == a + 2 && d == b-2) || (c == a +2 && d == b+2)) {
+                    //是否过河
+                    if(c>=5){return false;}
                     //是否堵象眼
                     if(c == a-2 && d == b - 2){
                         if (chessBoard[a-1][b-1] > 0) {return false;}
                     }
                     if(c == a-2 && d == b + 2){
-                        if (chessBoard[a-1][b-1] > 0) {return false;}
+                        if (chessBoard[a-1][b+1] > 0) {return false;}
                     }
                     if(c == a+2 && d == b - 2){
-                        if (chessBoard[a-1][b-1] > 0) {return false;}
+                        if (chessBoard[a+1][b-1] > 0) {return false;}
                     }
                     if(c == a+2 && d == b + 2){
-                        if (chessBoard[a-1][b-1] > 0) {return false;}
+                        if (chessBoard[a+1][b+1] > 0) {return false;}
                     }
-                    //不能越界
-
-                    //不能走横线或竖线
-
-                    //一次只能走二格
-
-
                     return true;
                 } else {
                     return false;
                 }
-
-            case 4:
+                case 4:
                 if (chessBoard[c][d] == 1) {
                     return false;
                 } else if (chessBoard[c][d] == 2) {
@@ -2387,10 +1846,16 @@ public class Game {
                     return false;
                 }
                 //不能出九宫
-
+                if (c >= 3) {return false;}
+                if (d <= 2) {return false;}
+                if (d >= 6) {return false;}
                 //一次只能走一格
-
                 //不能走横线或竖线
+                if ((c == a-1 && d == b+1) || (c == a-1 && d == b-1) || (c == a+1 && d == b+1) || (c == a+1 && d == b-1)) {
+                    return true;
+                } else {
+                    return false;
+                }
             case 5:
                 if (chessBoard[c][d] == 1) {
                     return false;
@@ -2408,15 +1873,9 @@ public class Game {
                     return false;
                 }
                 //不能出九宫
-                if (c >= 3) {
-                    return false;
-                }
-                if (d <= 2) {
-                    return false;
-                }
-                if (d >= 6) {
-                    return false;
-                }
+                if (c >= 3) {return false;}
+                if (d <= 2) {return false;}
+                if (d >= 6) {return false;}
                 //一次只能走一格
                 //不能走斜线
                 if ((c == a && d == b + 1) || (c == a && d == b - 1) || (c == a + 1 && d == b) || (c == a - 1 && d == b)) {
@@ -2424,17 +1883,7 @@ public class Game {
                 } else {
                     return false;
                 }
-                //将帅不能露脸
-                //目标棋子是将帅并且在同一列上
-                //判断中间是否有棋子
-//                int count = 0;
-//                int min = Math.min(oldRow,_newRow);
-//                int max = Math.max(oldRow,_newRow);
-//                for(int row=min+1;row<max;row++)
-//                {
-//                    if(this.gamePanel.chessBoradState[row][_newColumn] != -1){count++;}
-//                }
-//                if(count == 0){return false;}
+
             case 6:
                 if (chessBoard[c][d] == 1) {
                     return false;
@@ -2451,19 +1900,46 @@ public class Game {
                 } else if (chessBoard[c][d] == 7) {
                     return false;
                 }
-                //炮
-
                 //不能走斜线
-
                 //竖走
-
+                if(c!=a&d!=b){return false;}
+                //不能走斜线
                 //判断中间是否有棋子
-
-                //横走
-
-                //判断中间是否有棋子
-
-                //开始判断是否可以移动或吃棋子
+                int paoFindOne = 0;
+                //车往左走
+                if (a == c & b > d) {
+                    for (int i = b - 1; i > d; i--) {
+                        if (chessBoard[a][i] > 0) {
+                            paoFindOne++;
+                        }
+                    }
+                }
+                //车往右走
+                if (a == c & b < d) {
+                    for (int i = b + 1; i < d; i++) {
+                        if (chessBoard[a][i] > 0) {
+                            paoFindOne++;
+                        }
+                    }
+                }
+                //车往上走
+                if (b == d & a > c) {
+                    for (int i = a - 1; i > c; i--) {
+                        if (chessBoard[i][b] > 0) {
+                            paoFindOne++;
+                        }
+                    }
+                }
+                //车往下走
+                if (b == d & a < c) {
+                    for (int i = a + 1; i < c; i++) {
+                        if (chessBoard[i][b] > 0) {
+                            paoFindOne++;
+                        }
+                    }
+                }
+                if(paoFindOne<=1){return true;}
+                if(paoFindOne>1){return false;}
             case 7:
                 if (chessBoard[c][d] == 1) {
                     return false;
@@ -2480,20 +1956,28 @@ public class Game {
                 } else if (chessBoard[c][d] == 7) {
                     return false;
                 }
-                //卒兵
-
-                //不能走斜线
-
-                //一次只能走一格
-
+                //不能出九宫
                 //小卒过河不回头
-
-                //过河了
-
-                //下方
-                //过河了
+                if (c >= 5) {
+                    //一次只能走一格
+                    //不能走斜线
+                    if ((c == a && d == b + 1) || (c == a && d == b - 1) || (c == a + 1 && d == b)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
                 //不许向后退
                 //只能往前走
+                if (c < 5) {
+                    //一次只能走一格
+                    //不能走斜线
+                    if (c == a + 1 && d == b) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
             case 8:
                 if (chessBoard[c][d] == 8) {
                     return false;
@@ -2512,12 +1996,7 @@ public class Game {
                 }
                 //不能走斜线
                 //竖走
-                if (a == c & b != d) {
-                    return false;
-                }
-                if (b == d & a != b) {
-                    return false;
-                }
+                if(c!=a&d!=b){return false;}
                 //判断中间是否有棋子
                 //车往左走
                 if (a == c & b > d) {
@@ -2546,11 +2025,12 @@ public class Game {
                 //车往下走
                 if (b == d & a < c) {
                     for (int i = a + 1; i < c; i++) {
-                        if (chessBoard[a][i] > 0) {
+                        if (chessBoard[i][b] > 0) {
                             return false;
                         }
                     }
                 }
+                return true;
             case 9:
                 if (chessBoard[c][d] == 8) {
                     return false;
@@ -2568,15 +2048,36 @@ public class Game {
                     return false;
                 }
                 //必须走日字格
-
-                //向上跳
-
-
-                //向下跳
-
-                //向左跳
-
-                //向右跳
+                if ((c == a-1 && d == b - 2) || (c == a-2 && d == b-1) || (c == a + 1 && d == b-2) || (c == a +2 && d == b-1) || (c == a-1 && d == b + 2) || (c == a-2 && d == b+1) || (c == a + 1 && d == b+2) || (c == a +2 && d == b+1)) {
+                    //是否堵马脚
+                    if(c == a-1 && d == b - 2){
+                        if(a>=0&&a<=9&&b-1>=0&&b-1<=9){if (chessBoard[a][b-1] > 0) {return false;}}
+                    }
+                    if(c == a-2 && d == b-1){
+                        if(a-1>=0&&a-1<=9&&b>=0&&b<=9){if (chessBoard[a-1][b] > 0) {return false;}}
+                    }
+                    if(c == a + 1 && d == b-2){
+                        if(a>=0&&a<=9&&b-1>=0&&b-1<=9){if (chessBoard[a][b-1] > 0) {return false;}}
+                    }
+                    if(c == a +2 && d == b-1){
+                        if(a+1>=0&&a+1<=9&&b>=0&&b<=9){if (chessBoard[a+1][b] > 0) {return false;}}
+                    }
+                    if(c == a-1 && d == b + 2){
+                        if(a>=0&&a<=9&&b+1>=0&&b+1<=9){if (chessBoard[a][b+1] > 0) {return false;}}
+                    }
+                    if(c == a-2 && d == b+1){
+                        if(a-1>=0&&a-1<=9&&b>=0&&b<=9){if (chessBoard[a-1][b] > 0) {return false;}}
+                    }
+                    if(c == a + 1 && d == b+2){
+                        if(a>=0&&a<=9&&b+1>=0&&b+1<=9){if (chessBoard[a][b+1] > 0) {return false;}}
+                    }
+                    if(c == a +2 && d == b+1){
+                        if(a+1>=0&&a+1<=9&&b>=0&&b<=9){if (chessBoard[a+1][b] > 0) {return false;}}
+                    }
+                    return true;
+                } else {
+                    return false;
+                }
             case 10:
                 if (chessBoard[c][d] == 8) {
                     return false;
@@ -2593,13 +2094,26 @@ public class Game {
                 } else if (chessBoard[c][d] == 14) {
                     return false;
                 }
-                //不能越界
-
-                //不能走横线或竖线
-
-                //一次只能走二格
-
-                //是否堵象眼
+                if ((c == a-2 && d == b - 2) || (c == a-2 && d == b+2) || (c == a + 2 && d == b-2) || (c == a +2 && d == b+2)) {
+                    //是否过河
+                    if(c<=4){return false;}
+                    //是否堵象眼
+                    if(c == a-2 && d == b - 2){
+                        if (chessBoard[a-1][b-1] > 0) {return false;}
+                    }
+                    if(c == a-2 && d == b + 2){
+                        if (chessBoard[a-1][b+1] > 0) {return false;}
+                    }
+                    if(c == a+2 && d == b - 2){
+                        if (chessBoard[a+1][b-1] > 0) {return false;}
+                    }
+                    if(c == a+2 && d == b + 2){
+                        if (chessBoard[a+1][b+1] > 0) {return false;}
+                    }
+                    return true;
+                } else {
+                    return false;
+                }
             case 11:
                 if (chessBoard[c][d] == 8) {
                     return false;
@@ -2617,10 +2131,16 @@ public class Game {
                     return false;
                 }
                 //不能出九宫
-
+                if (c <= 6) {return false;}
+                if (d <= 2) {return false;}
+                if (d >= 6) {return false;}
                 //一次只能走一格
-
                 //不能走横线或竖线
+                if ((c == a-1 && d == b+1) || (c == a-1 && d == b-1) || (c == a+1 && d == b+1) || (c == a+1 && d == b-1)) {
+                    return true;
+                } else {
+                    return false;
+                }
             case 12:
                 if (chessBoard[c][d] == 8) {
                     return false;
@@ -2638,15 +2158,9 @@ public class Game {
                     return false;
                 }
                 //不能出九宫
-                if (c <= 6) {
-                    return false;
-                }
-                if (d <= 2) {
-                    return false;
-                }
-                if (d >= 6) {
-                    return false;
-                }
+                if (c <= 6) {return false;}
+                if (d <= 2) {return false;}
+                if (d >= 6) {return false;}
                 //一次只能走一格
                 //不能走斜线
                 if ((c == a && d == b + 1) || (c == a && d == b - 1) || (c == a + 1 && d == b) || (c == a - 1 && d == b)) {
@@ -2654,17 +2168,6 @@ public class Game {
                 } else {
                     return false;
                 }
-                //将帅不能露脸
-                //目标棋子是将帅并且在同一列上
-                //判断中间是否有棋子
-//                int count = 0;
-//                int min = Math.min(oldRow,_newRow);
-//                int max = Math.max(oldRow,_newRow);
-//                for(int row=min+1;row<max;row++)
-//                {
-//                    if(this.gamePanel.chessBoradState[row][_newColumn] != -1){count++;}
-//                }
-//                if(count == 0){return false;}
             case 13:
                 if (chessBoard[c][d] == 8) {
                     return false;
@@ -2681,6 +2184,45 @@ public class Game {
                 } else if (chessBoard[c][d] == 14) {
                     return false;
                 }
+                //竖走
+                //不能走斜线
+                if(c!=a&d!=b){return false;}
+                //判断中间是否有棋子
+                int paoFindTwo = 0;
+                //车往左走
+                if (a == c & b > d) {
+                    for (int i = b - 1; i > d; i--) {
+                        if (chessBoard[a][i] > 0) {
+                            paoFindTwo++;
+                        }
+                    }
+                }
+                //车往右走
+                if (a == c & b < d) {
+                    for (int i = b + 1; i < d; i++) {
+                        if (chessBoard[a][i] > 0) {
+                            paoFindTwo++;
+                        }
+                    }
+                }
+                //车往上走
+                if (b == d & a > c) {
+                    for (int i = a - 1; i > c; i--) {
+                        if (chessBoard[i][b] > 0) {
+                            paoFindTwo++;
+                        }
+                    }
+                }
+                //车往下走
+                if (b == d & a < c) {
+                    for (int i = a + 1; i < c; i++) {
+                        if (chessBoard[i][b] > 0) {
+                            paoFindTwo++;
+                        }
+                    }
+                }
+                if(paoFindTwo<=1){return true;}
+                if(paoFindTwo>1){return false;}
             case 14:
                 if (chessBoard[c][d] == 8) {
                     return false;
@@ -2696,6 +2238,28 @@ public class Game {
                     return false;
                 } else if (chessBoard[c][d] == 14) {
                     return false;
+                }
+                //不能出九宫
+                //小卒过河不回头
+                if (c < 5) {
+                    //一次只能走一格
+                    //不能走斜线
+                    if ((c == a && d == b + 1) || (c == a && d == b - 1) || (c == a - 1 && d == b)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+                //不许向后退
+                //只能往前走
+                if (c >= 5) {
+                    //一次只能走一格
+                    //不能走斜线
+                    if (c == a - 1 && d == b) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
             default:
                 break;
@@ -2719,24 +2283,42 @@ public class Game {
                 }
             }
         }
+//        System.out.println(listMove);
     }
 
     /**
      * 功能：检查是否将军
      */
-    private boolean check() {
+    private boolean checkRed() {
         //全体循环，不知道将哪头的军
         for (int row = 0; row < chessBoard.length; row++) {
             for (int col = 0; col < chessBoard[0].length; col++) {
                 getMoveRoute(row, col);
                 for (Map<String, Integer> map : listMove) {
-                    if ((chessBoard[map.get("row")][map.get("col")]) == 5 | (chessBoard[map.get("row")][map.get("col")]) == 12) {
-                        return false;
-                    }
+                        if ((chessBoard[map.get("row")][map.get("col")]) == 5) {
+                            return false;
+                        }
                 }
-                listMove.clear();
             }
         }
+        listMove.clear();
+        return true;
+    }
+    private boolean checkBlack() {
+        //全体循环，不知道将哪头的军
+        for (int row = 0; row < chessBoard.length; row++) {
+            for (int col = 0; col < chessBoard[0].length; col++) {
+                getMoveRoute(row, col);
+                for (Map<String, Integer> map : listMove) {
+                        if ((chessBoard[map.get("row")][map.get("col")]) == 12) {
+                            return false;
+                    }
+
+                }
+
+            }
+        }
+        listMove.clear();
         return true;
     }
 }
