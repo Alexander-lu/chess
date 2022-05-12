@@ -22,10 +22,10 @@ public class Game {
     };
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+//        Scanner sc = new Scanner(System.in);
         Game a = new Game();
-//        a.loadActions("src/main/resources/input4.txt");
-        a.loadActions(sc);
+        a.loadActions("src/main/resources/input4.txt");
+//        a.loadActions(sc);
         a.gameMove();
     }
 
@@ -164,24 +164,8 @@ public class Game {
     /**
      * 功能：读取文件获取Actions
      */
-    public boolean loadActions(Scanner scanner) {
-        try {
-            int nAction = scanner.nextInt();
-            // 读取所有地点
-            for (int i = 0; i < nAction; i++) {
-                String inputBianHao = scanner.next();
-                String inputAction = scanner.next();
-                actions.add(inputAction);
-            }
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
-
-//    public boolean loadActions(String path) {
+//    public boolean loadActions(Scanner scanner) {
 //        try {
-//            Scanner scanner = new Scanner(new File(path));
 //            int nAction = scanner.nextInt();
 //            // 读取所有地点
 //            for (int i = 0; i < nAction; i++) {
@@ -189,12 +173,28 @@ public class Game {
 //                String inputAction = scanner.next();
 //                actions.add(inputAction);
 //            }
-//        } catch (FileNotFoundException e) {
+//        } catch (Exception e) {
 //            return false;
 //        }
-////        System.out.println(actions);
 //        return true;
 //    }
+
+    public boolean loadActions(String path) {
+        try {
+            Scanner scanner = new Scanner(new File(path));
+            int nAction = scanner.nextInt();
+            // 读取所有地点
+            for (int i = 0; i < nAction; i++) {
+                String inputBianHao = scanner.next();
+                String inputAction = scanner.next();
+                actions.add(inputAction);
+            }
+        } catch (FileNotFoundException e) {
+            return false;
+        }
+//        System.out.println(actions);
+        return true;
+    }
 
     /**
      * 功能：读取文件跑游戏
