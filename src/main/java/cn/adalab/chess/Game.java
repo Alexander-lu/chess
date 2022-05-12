@@ -24,7 +24,7 @@ public class Game {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Game a = new Game();
-//        a.loadActions("src/main/resources/input2.txt");
+//        a.loadActions("src/main/resources/input4.txt");
         a.loadActions(sc);
         a.gameMove();
     }
@@ -1938,7 +1938,10 @@ public class Game {
                         }
                     }
                 }
-                if(paoFindOne<=1){return true;}
+                if(paoFindOne==1&chessBoard[c][d]>0){return true;}
+                if(paoFindOne==1&chessBoard[c][d]==0){return false;}
+                if(paoFindOne==0&chessBoard[c][d]>0){return false;}
+                if(paoFindOne==0&chessBoard[c][d]==0){return true;}
                 if(paoFindOne>1){return false;}
             case 7:
                 if (chessBoard[c][d] == 1) {
@@ -2221,7 +2224,10 @@ public class Game {
                         }
                     }
                 }
-                if(paoFindTwo<=1){return true;}
+                if(paoFindTwo==1&chessBoard[c][d]>0){return true;}
+                if(paoFindTwo==1&chessBoard[c][d]==0){return false;}
+                if(paoFindTwo==0&chessBoard[c][d]>0){return false;}
+                if(paoFindTwo==0&chessBoard[c][d]==0){return true;}
                 if(paoFindTwo>1){return false;}
             case 14:
                 if (chessBoard[c][d] == 8) {
