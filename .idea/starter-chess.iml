@@ -12,5 +12,6 @@
     <orderEntry type="library" name="junit-platform-console-standalone-1.8.2" level="project" />
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="lib (2)" level="project" />
   </component>
 </module>
