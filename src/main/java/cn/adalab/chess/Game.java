@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class Game {
-    List<Map<String,Integer>> listMove = new ArrayList<Map<String,Integer>>();
+    List<Map<String, Integer>> listMove = new ArrayList<Map<String, Integer>>();
     List<String> actions = new ArrayList<>();
     int[][] chessBoard = {
             {1, 2, 3, 4, 5, 4, 3, 2, 1},
@@ -21,12 +21,12 @@ public class Game {
             {8, 9, 10, 11, 12, 11, 10, 9, 8},
     };
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Game a = new Game();
         a.loadActions(sc);
         a.gameMove();
-        }
+    }
 
     public void printChessBoard() {
         int width = chessBoard[0].length;    // 心形的宽度
@@ -80,6 +80,7 @@ public class Game {
             System.out.println("");
         }
     }
+
     /**
      * 功能：红方移动棋子
      */
@@ -384,11 +385,12 @@ public class Game {
         }
 
     }
+
     /**
      * 功能：黑方移动棋子
      */
     public void playerBlackMove(int a, int b, int c, int d) {
-        int count=0;
+        int count = 0;
         switch (chessBoard[a][b]) {
             case 1:
                 count = 1;
@@ -695,6 +697,7 @@ public class Game {
                 break;
         }
     }
+
     /**
      * 功能：读取文件获取Actions
      */
@@ -712,10 +715,11 @@ public class Game {
         }
         return true;
     }
+
     /**
      * 功能：读取文件跑游戏
      */
-    public void gameMove(){
+    public void gameMove() {
         boolean ifNext = true;
         for (int i = 0; i < actions.size(); i++) {
             int actiona = 0;
@@ -952,44 +956,50 @@ public class Game {
                         case "进":
                             if (Math.abs(actiond - actionb) == 1) {
                                 actionc = actiona - 2;
-                                if(chessBoard[actiona-1][actionb]!=0){
-                                    System.out.println((i+1)+". error");
+                                if (chessBoard[actiona - 1][actionb] != 0) {
+                                    System.out.println((i + 1) + ". error");
                                     i++;
-                                    System.out.println((i+1)+". skip");
-                                    continue;}
+                                    System.out.println((i + 1) + ". skip");
+                                    continue;
+                                }
                             } else if (Math.abs(actiond - actionb) == 2) {
-                                if(chessBoard[actiona][actionb-1]!=0){
-                                    System.out.println((i+1)+". error");
+                                if (chessBoard[actiona][actionb - 1] != 0) {
+                                    System.out.println((i + 1) + ". error");
                                     i++;
-                                    System.out.println((i+1)+". skip");
-                                    continue;}
-                                if(chessBoard[actiona][actionb+1]!=0){
-                                    System.out.println((i+1)+". error");
+                                    System.out.println((i + 1) + ". skip");
+                                    continue;
+                                }
+                                if (chessBoard[actiona][actionb + 1] != 0) {
+                                    System.out.println((i + 1) + ". error");
                                     i++;
-                                    System.out.println((i+1)+". skip");
-                                    continue;}
+                                    System.out.println((i + 1) + ". skip");
+                                    continue;
+                                }
                                 actionc = actiona - 1;
                             }
                             break;
                         case "退":
                             if (Math.abs(actiond - actionb) == 1) {
                                 actionc = actiona + 2;
-                                if(chessBoard[actiona+1][actionb]!=0){
-                                    System.out.println((i+1)+". error");
+                                if (chessBoard[actiona + 1][actionb] != 0) {
+                                    System.out.println((i + 1) + ". error");
                                     i++;
-                                    System.out.println((i+1)+". skip");
-                                    continue;}
+                                    System.out.println((i + 1) + ". skip");
+                                    continue;
+                                }
                             } else if (Math.abs(actiond - actionb) == 2) {
-                                if(chessBoard[actiona][actionb-1]!=0){
-                                    System.out.println((i+1)+". error");
+                                if (chessBoard[actiona][actionb - 1] != 0) {
+                                    System.out.println((i + 1) + ". error");
                                     i++;
-                                    System.out.println((i+1)+". skip");
-                                    continue;}
-                                if(chessBoard[actiona][actionb+1]!=0){
-                                    System.out.println((i+1)+". error");
+                                    System.out.println((i + 1) + ". skip");
+                                    continue;
+                                }
+                                if (chessBoard[actiona][actionb + 1] != 0) {
+                                    System.out.println((i + 1) + ". error");
                                     i++;
-                                    System.out.println((i+1)+". skip");
-                                    continue;}
+                                    System.out.println((i + 1) + ". skip");
+                                    continue;
+                                }
                                 actionc = actiona + 1;
                             }
                             break;
@@ -1465,26 +1475,25 @@ public class Game {
                     }
                 }
                 if (chessBoard[actionc][actiond] == 5) {
-                    System.out.println((i+1)+". 红方胜");
+                    System.out.println((i + 1) + ". 红方胜");
                     break;
                 }
-                if(isAbleToMove(actiona, actionb, actionc, actiond)){
-                    if(check()){
-                    playerRedMove(actiona, actionb, actionc, actiond);
-                    System.out.println((i+1)+". ok");
-                    ifNext = false;}
-                    else{
-                        System.out.println((i+1)+". 将军");
+                if (isAbleToMove(actiona, actionb, actionc, actiond)) {
+                    if (check()) {
+                        playerRedMove(actiona, actionb, actionc, actiond);
+                        System.out.println((i + 1) + ". ok");
+                        ifNext = false;
+                    } else {
+                        System.out.println((i + 1) + ". 将军");
                         continue;
                     }
-                }else {
-                    System.out.println((i+1)+". error");
+                } else {
+                    System.out.println((i + 1) + ". error");
                     i++;
-                    System.out.println((i+1)+". skip");
+                    System.out.println((i + 1) + ". skip");
                     continue;
                 }
-            }
-            else{
+            } else {
                 switch (actionToCharArray2) {
                     case "1":
                         actionb = 0;
@@ -2191,40 +2200,44 @@ public class Game {
                     }
                 }
                 if (chessBoard[actionc][actiond] == 5) {
-                    System.out.println((i+1)+". 黑方胜");
+                    System.out.println((i + 1) + ". 黑方胜");
                     break;
                 }
-                if(isAbleToMove(actiona, actionb, actionc, actiond)){
-                    if(check()){
+                if (isAbleToMove(actiona, actionb, actionc, actiond)) {
+                    if (check()) {
                         playerBlackMove(actiona, actionb, actionc, actiond);
-                        System.out.println((i+1)+". ok");
-                        ifNext = true;}
-                    else{
-                        System.out.println((i+1)+". 将军");
+                        System.out.println((i + 1) + ". ok");
+                        ifNext = true;
+                    } else {
+                        System.out.println((i + 1) + ". 将军");
                     }
-                }else {
-                    System.out.println((i+1)+". error");
+                } else {
+                    System.out.println((i + 1) + ". error");
                     i++;
-                    System.out.println((i+1)+". skip");
+                    System.out.println((i + 1) + ". skip");
                 }
             }
 
         }
     }
+
     /**
      * 功能：判断从(a,b)能否移动到（c,d）
      */
-    public boolean isAbleToMove(int a, int b, int c, int d){
-        if(a<0 | c>=chessBoard[0].length){
+    public boolean isAbleToMove(int a, int b, int c, int d) {
+        if (a == c & b == d) {
             return false;
         }
-        if(b<0 | c>=chessBoard.length){
+        if (a < 0 | c >= chessBoard[0].length) {
             return false;
         }
-        if(c<0 | c>=chessBoard[0].length){
+        if (b < 0 | c >= chessBoard.length) {
             return false;
         }
-        if(d<0 | c>=chessBoard.length){
+        if (c < 0 | c >= chessBoard[0].length) {
+            return false;
+        }
+        if (d < 0 | c >= chessBoard.length) {
             return false;
         }
         //不能吃自己伙的棋子
@@ -2248,14 +2261,46 @@ public class Game {
                     return false;
                 }
                 //不能走斜线
-
                 //竖走
-
+                if (a == c & b != d) {
+                    return false;
+                }
+                if (b == d & a != b) {
+                    return false;
+                }
                 //判断中间是否有棋子
-
-                //横走
-
-                //判断中间是否有棋子
+                //车往左走
+                if (a == c & b > d) {
+                    for (int i = b - 1; i > d; i--) {
+                        if (chessBoard[a][i] > 0) {
+                            return false;
+                        }
+                    }
+                }
+                //车往右走
+                if (a == c & b < d) {
+                    for (int i = b + 1; i < d; i++) {
+                        if (chessBoard[a][i] > 0) {
+                            return false;
+                        }
+                    }
+                }
+                //车往上走
+                if (b == d & a > c) {
+                    for (int i = a - 1; i > c; i--) {
+                        if (chessBoard[i][b] > 0) {
+                            return false;
+                        }
+                    }
+                }
+                //车往下走
+                if (b == d & a < c) {
+                    for (int i = a + 1; i < c; i++) {
+                        if (chessBoard[a][i] > 0) {
+                            return false;
+                        }
+                    }
+                }
             case 2:
                 if (chessBoard[c][d] == 1) {
                     return false;
@@ -2298,13 +2343,33 @@ public class Game {
                 } else if (chessBoard[c][d] == 7) {
                     return false;
                 }
-                //不能越界
+                //只能往左上左下右上右下跳
+                if ((c == a-2 && d == b - 2) || (c == a-2 && d == b+2) || (c == a + 2 && d == b-2) || (c == a +2 && d == b+2)) {
+                    //是否堵象眼
+                    if(c == a-2 && d == b - 2){
+                        if (chessBoard[a-1][b-1] > 0) {return false;}
+                    }
+                    if(c == a-2 && d == b + 2){
+                        if (chessBoard[a-1][b-1] > 0) {return false;}
+                    }
+                    if(c == a+2 && d == b - 2){
+                        if (chessBoard[a-1][b-1] > 0) {return false;}
+                    }
+                    if(c == a+2 && d == b + 2){
+                        if (chessBoard[a-1][b-1] > 0) {return false;}
+                    }
+                    //不能越界
 
-                //不能走横线或竖线
+                    //不能走横线或竖线
 
-                //一次只能走二格
+                    //一次只能走二格
 
-                //是否堵象眼
+
+                    return true;
+                } else {
+                    return false;
+                }
+
             case 4:
                 if (chessBoard[c][d] == 1) {
                     return false;
@@ -2343,11 +2408,22 @@ public class Game {
                     return false;
                 }
                 //不能出九宫
-
+                if (c >= 3) {
+                    return false;
+                }
+                if (d <= 2) {
+                    return false;
+                }
+                if (d >= 6) {
+                    return false;
+                }
                 //一次只能走一格
-
                 //不能走斜线
-
+                if ((c == a && d == b + 1) || (c == a && d == b - 1) || (c == a + 1 && d == b) || (c == a - 1 && d == b)) {
+                    return true;
+                } else {
+                    return false;
+                }
                 //将帅不能露脸
                 //目标棋子是将帅并且在同一列上
                 //判断中间是否有棋子
@@ -2433,6 +2509,47 @@ public class Game {
                     return false;
                 } else if (chessBoard[c][d] == 14) {
                     return false;
+                }
+                //不能走斜线
+                //竖走
+                if (a == c & b != d) {
+                    return false;
+                }
+                if (b == d & a != b) {
+                    return false;
+                }
+                //判断中间是否有棋子
+                //车往左走
+                if (a == c & b > d) {
+                    for (int i = b - 1; i > d; i--) {
+                        if (chessBoard[a][i] > 0) {
+                            return false;
+                        }
+                    }
+                }
+                //车往右走
+                if (a == c & b < d) {
+                    for (int i = b + 1; i < d; i++) {
+                        if (chessBoard[a][i] > 0) {
+                            return false;
+                        }
+                    }
+                }
+                //车往上走
+                if (b == d & a > c) {
+                    for (int i = a - 1; i > c; i--) {
+                        if (chessBoard[i][b] > 0) {
+                            return false;
+                        }
+                    }
+                }
+                //车往下走
+                if (b == d & a < c) {
+                    for (int i = a + 1; i < c; i++) {
+                        if (chessBoard[a][i] > 0) {
+                            return false;
+                        }
+                    }
                 }
             case 9:
                 if (chessBoard[c][d] == 8) {
@@ -2521,11 +2638,22 @@ public class Game {
                     return false;
                 }
                 //不能出九宫
-
+                if (c <= 6) {
+                    return false;
+                }
+                if (d <= 2) {
+                    return false;
+                }
+                if (d >= 6) {
+                    return false;
+                }
                 //一次只能走一格
-
                 //不能走斜线
-
+                if ((c == a && d == b + 1) || (c == a && d == b - 1) || (c == a + 1 && d == b) || (c == a - 1 && d == b)) {
+                    return true;
+                } else {
+                    return false;
+                }
                 //将帅不能露脸
                 //目标棋子是将帅并且在同一列上
                 //判断中间是否有棋子
@@ -2574,6 +2702,7 @@ public class Game {
         }
         return true;
     }
+
     /**
      * 功能：得到某棋子的可移动路线图
      */
@@ -2582,7 +2711,7 @@ public class Game {
         //懒得分类挑，反正电脑计算快
         for (int row = 0; row < chessBoard.length; row++) {
             for (int col = 0; col < chessBoard[0].length; col++) {
-                if (isAbleToMove(a,b,row,col)) {
+                if (isAbleToMove(a, b, row, col)) {
                     Map<String, Integer> map = new HashMap<String, Integer>();
                     map.put("row", row);
                     map.put("col", col);
@@ -2591,6 +2720,7 @@ public class Game {
             }
         }
     }
+
     /**
      * 功能：检查是否将军
      */
