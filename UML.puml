@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Game {
+List<String> actions
+int[][] chessBoard
+Void main()
+void printChessBoard()
+void playerRedMove(int a, int b, int c, int d)
+void playerBlackMove(int a, int b, int c, int d)
+boolean loadActions(String path)
+void gameMove()
+}
+
+
+@enduml
