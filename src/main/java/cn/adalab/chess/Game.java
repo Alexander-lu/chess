@@ -11,30 +11,14 @@ import java.io.*;
 import java.util.*;
 
 public class Game extends GraphicsProgram  implements Backgroundmusic{
+    /* 初始化音乐 */
     public Play gamestart;
+    /* 生成随机数 */
     RandomGenerator randomGenerator = RandomGenerator.getInstance();
+    /* 判断红棋还是黑棋先走 */
     boolean ifRedMove= true;
-    int CurrA;
-    int CurrB;
-    int AftA;
-    int AftB;
-    int AftC;
-    int AftD;
-    String huanyingyue = "换音乐";
-    String tingzhi = "停止播放";
-    JButton musicButton = new JButton("换音乐");
-    JButton stopButton = new JButton("停止播放");
-    JButton save = new JButton("save");
-    JButton read = new JButton("read");
-    JButton auto = new JButton("auto");
-    JLabel nameLabel = new JLabel("请点击棋子");
-    JTextField TextField = new JTextField("请输入行为");
-    /* 游戏界面的长和宽 */
-    public static final int APPLICATION_WIDTH = 600;
-    public static final int APPLICATION_HEIGHT = 700;
+    /* 初始化棋盘 */
     GImage ChessBoard;
-    List<Map<String, Integer>> listMove = new ArrayList<Map<String, Integer>>();
-    List<String> actions = new ArrayList<>();
     int[][] chessBoard = {
             {1, 2, 3, 4, 5, 4, 3, 2, 1},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -47,6 +31,26 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {8, 9, 10, 11, 12, 11, 10, 9, 8},
     };
+    /* CurrA和CurrB分别代表现在鼠标的Y和X */
+    int CurrA;
+    int CurrB;
+    int AftA;
+    int AftB;
+    int AftC;
+    int AftD;
+    JButton musicButton = new JButton("换音乐");
+    JButton stopButton = new JButton("停止播放");
+    JButton save = new JButton("save");
+    JButton read = new JButton("read");
+    JButton auto = new JButton("auto");
+    JLabel nameLabel = new JLabel("请点击棋子");
+    JTextField TextField = new JTextField("请输入行为");
+    /* 游戏界面的长和宽 */
+    public static final int APPLICATION_WIDTH = 600;
+    public static final int APPLICATION_HEIGHT = 700;
+    List<Map<String, Integer>> listMove = new ArrayList<Map<String, Integer>>();
+    List<String> actions = new ArrayList<>();
+
     /**
      * 功能：红方移动棋子
      */
@@ -1157,11 +1161,11 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
         if ("auto".equals(event.getActionCommand())) {
             readActions();
         }
-        if (huanyingyue.equals(event.getActionCommand())) {
+        if ("换音乐".equals(event.getActionCommand())) {
             int a = randomGenerator.nextInt(1, 2);
             changeMusic(getMusicName(a));
         }
-        if (tingzhi.equals(event.getActionCommand())) {
+        if ("停止播放".equals(event.getActionCommand())) {
             stopMusic();
         }
     }
