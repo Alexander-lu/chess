@@ -27,7 +27,6 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
     JButton save = new JButton("save");
     JButton read = new JButton("read");
     JButton auto = new JButton("auto");
-    JButton next = new JButton("next");
     JLabel nameLabel = new JLabel("请点击棋子");
     JTextField TextField = new JTextField("请输入行为");
     /* 游戏界面的长和宽 */
@@ -150,7 +149,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
     public void gameMove() {
         for (int i = 0; i < actions.size(); i++) {
             if (ifRedMove) {
-                JOptionPane.showMessageDialog(null,actions.get(i));
+                JOptionPane.showMessageDialog(null,i+". "+actions.get(i));
                 realRedGameMove(actions.get(i));
                 if (ifRedMove) {
                     i++;
@@ -159,7 +158,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                     addBackGroundImage();
                     addImage();}
             }else {
-                JOptionPane.showMessageDialog(null,actions.get(i));
+                JOptionPane.showMessageDialog(null,i+". "+actions.get(i));
                 realBlackGameMove(actions.get(i));
                 if (ifRedMove) {
                     clear();
@@ -970,12 +969,10 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
         add(save,SOUTH);
         add(read,SOUTH);
         add(auto,SOUTH);
-        add(next,SOUTH);
         TextField.addActionListener(this);
         save.addActionListener(this);
         read.addActionListener(this);
         auto.addActionListener(this);
-        next.addActionListener(this);
         addMouseListeners();
         add(musicButton, SOUTH);
         add(stopButton,SOUTH);
@@ -1056,7 +1053,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                             ifRedMove = false;
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "error");
+                        JOptionPane.showMessageDialog(null, "走法有误");
                         ifRedMove = true;
                         continue;
                     }
@@ -1123,7 +1120,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                             ifRedMove = true;
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "error");
+                        JOptionPane.showMessageDialog(null, "走法有误");
                         ifRedMove = false;
                     }
                     clear();
@@ -1904,7 +1901,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                         ifRedMove=false;
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null,"error,skip");
+                    JOptionPane.showMessageDialog(null,"走法有误");
                     ifRedMove=true;
                 }
             }
@@ -2641,7 +2638,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                     ifRedMove=true;
                 }
             } else {
-                JOptionPane.showMessageDialog(null,"error");
+                JOptionPane.showMessageDialog(null,"走法有误");
                 ifRedMove=false;
             }
 
