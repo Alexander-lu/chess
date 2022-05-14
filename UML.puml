@@ -2,14 +2,50 @@
 'https://plantuml.com/class-diagram
 
 class Game {
-List<String> actions
+Play gamestart
+boolean ifRedMove
+GImage ChessBoard
 int[][] chessBoard
-Void main()
-void printChessBoard()
+int CurrA
+int CurrB
+int AftA
+int AftB
+int AftC
+int AftD
+JButton musicButton
+JButton stopButton
+JButton save
+JButton read
+JButton auto
+JLabel nameLabel
+JTextField TextField
+List<Map<String, Integer>> listMove
+List<String> actions
 void playerRedMove(int a, int b, int c, int d)
 void playerBlackMove(int a, int b, int c, int d)
-boolean loadActions(String path)
+void readActions()
 void gameMove()
+boolean isAbleToMove(int a, int b, int c, int d)
+void getMoveRoute(int a, int b)
+boolean checkRed()
+boolean checkBlack()
+void addBackGroundImage()
+void addImage()
+int tansformX(int b)
+int tansformY(int a)
+int tansformB(int X)
+int tansformA(int Y)
+void init()
+void run()
+void actionPerformed(ActionEvent event)
+void realRedGameMove(String inputName)
+void realBlackGameMove(String inputName)
+void mouseMoved(MouseEvent e)
+void saveAsFileWriter()
+void readAsFileWriter()
+void changeMusic(String file)
+void stopMusic()
+String getMusicName(int a)
 }
 
 
