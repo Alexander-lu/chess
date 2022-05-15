@@ -1,15 +1,12 @@
 package cn.adalab.chess;
-
 import acm.graphics.GImage;
 import acm.program.GraphicsProgram;
 import acm.util.RandomGenerator;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.io.*;
 import java.util.*;
-
 public class Game extends GraphicsProgram  implements Backgroundmusic{
     /* 初始化音乐 */
     public Play gamestart;
@@ -48,85 +45,17 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
     /* 游戏界面的长和宽 */
     public static final int APPLICATION_WIDTH = 600;
     public static final int APPLICATION_HEIGHT = 700;
-    List<Map<String, Integer>> listMove = new ArrayList<Map<String, Integer>>();
     List<String> actions = new ArrayList<>();
-
+    List<Map<String, Integer>> listMove = new ArrayList<Map<String, Integer>>();
     /**
-     * 功能：红方移动棋子
+     * 功能：移动棋子
      */
-    public void playerRedMove(int a, int b, int c, int d) {
-        switch (chessBoard[a][b]) {
-            case 8:
-                    chessBoard[c][d] = 8;
-                    chessBoard[a][b] = 0;
-                    break;
-            case 9:
-                chessBoard[c][d] = 9;
-                chessBoard[a][b] = 0;
-                break;
-            case 10:
-                chessBoard[c][d] = 10;
-                chessBoard[a][b] = 0;
-                break;
-            case 11:
-                chessBoard[c][d] = 11;
-                chessBoard[a][b] = 0;
-                break;
-            case 12:
-                chessBoard[c][d] = 12;
-                chessBoard[a][b] = 0;
-                break;
-            case 13:
-                chessBoard[c][d] = 13;
-                chessBoard[a][b] = 0;
-                break;
-            case 14:
-                chessBoard[c][d] = 14;
-                chessBoard[a][b] = 0;
-                break;
-            default:
-                break;
+    public void playerMove(int a, int b, int c, int d) {
+        chessBoard[c][d] = chessBoard[a][b];
+        chessBoard[a][b] = 0;
+        gamestart = new Play("src/music/move.mp3");
+        gamestart.start();
         }
-//printChessBoard();
-    }
-    /**
-     * 功能：黑方移动棋子
-     */
-    public void playerBlackMove(int a, int b, int c, int d) {
-        switch (chessBoard[a][b]) {
-            case 1:
-                chessBoard[c][d] = 1;
-                chessBoard[a][b] = 0;
-                break;
-            case 2:
-                chessBoard[c][d] = 2;
-                chessBoard[a][b] = 0;
-                break;
-            case 3:
-                chessBoard[c][d] = 3;
-                chessBoard[a][b] = 0;
-                break;
-            case 4:
-                chessBoard[c][d] = 4;
-                chessBoard[a][b] = 0;
-                break;
-            case 5:
-                chessBoard[c][d] = 5;
-                chessBoard[a][b] = 0;
-                break;
-            case 6:
-                chessBoard[c][d] = 6;
-                chessBoard[a][b] = 0;
-                break;
-            case 7:
-                chessBoard[c][d] = 7;
-                chessBoard[a][b] = 0;
-                break;
-            default:
-                break;
-        }
-//        printChessBoard();
-    }
     /**
      * 功能：读取文件获取Actions
      */
@@ -153,8 +82,8 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
     public void gameMove() {
         for (int i = 0; i < actions.size(); i++) {
             if (ifRedMove) {
-                JOptionPane.showMessageDialog(null,i+". "+actions.get(i));
                 realRedGameMove(actions.get(i));
+                JOptionPane.showMessageDialog(null,i+". "+actions.get(i));
                 if (ifRedMove) {
                     i++;
                     continue;
@@ -162,8 +91,8 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                     addBackGroundImage();
                     addImage();}
             }else {
-                JOptionPane.showMessageDialog(null,i+". "+actions.get(i));
                 realBlackGameMove(actions.get(i));
+                JOptionPane.showMessageDialog(null,i+". "+actions.get(i));
                 if (ifRedMove) {
                     clear();
                     addBackGroundImage();
@@ -780,8 +709,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
     /**
      * 功能：得到某棋子的可移动路线图
      */
-    private void getMoveRoute(int a, int b) {
-        listMove.clear();
+    private void getMoveRoute(int a, int b) {listMove.clear();
         //懒得分类挑，反正电脑计算快
         for (int row = 0; row < chessBoard.length; row++) {
             for (int col = 0; col < chessBoard[0].length; col++) {
@@ -792,9 +720,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                     listMove.add(map);
                 }
             }
-        }
-    }
-
+        }}
     /**
      * 功能：检查是否将军
      */
@@ -989,8 +915,6 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
      */
     @Override
     public void run() {
-        gamestart = new Play("src/music/1.mp3");
-        gamestart.start();
         addBackGroundImage();
         addImage();
         nameLabel.setText("点击屏幕开始游戏");
@@ -1003,64 +927,74 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                     AftB = CurrB;
                     while (AftA == 10 | AftB == 10) {
                         nameLabel.setText("未选中：请红方选子:错误选子");
+                        gamestart = new Play("src/music/fail.mp3");
+                        gamestart.start();
                         waitForClick();
                         AftA = CurrA;
                         AftB = CurrB;
                     }
                     while (chessBoard[AftA][AftB] == 0 | chessBoard[AftA][AftB] == 1 | chessBoard[AftA][AftB] == 2 | chessBoard[AftA][AftB] == 3 | chessBoard[AftA][AftB] == 4 | chessBoard[AftA][AftB] == 5 | chessBoard[AftA][AftB] == 6 | chessBoard[AftA][AftB] == 7) {
                         nameLabel.setText("未选中：请红方选子:错误选子");
+                        gamestart = new Play("src/music/fail.mp3");
+                        gamestart.start();
                         waitForClick();
                         AftA = CurrA;
                         AftB = CurrB;
                         while (AftA == 10 | AftB == 10) {
                             nameLabel.setText("未选中：请红方选子:错误选子");
+                            gamestart = new Play("src/music/fail.mp3");
+                            gamestart.start();
                             waitForClick();
                             AftA = CurrA;
                             AftB = CurrB;
                         }
                     }
                     nameLabel.setText("已选中:请红方落子:请落子");
+                    gamestart = new Play("src/music/check.mp3");
+                    gamestart.start();
                     waitForClick();
                     AftC = CurrA;
                     AftD = CurrB;
                     while (AftC == 10 | AftD == 10) {
-                        nameLabel.setText("已选中:请红方落子:错误落子");
+                        nameLabel.setText("已选中:请红方落子:没选到棋子");
+                        gamestart = new Play("src/music/fail.mp3");
+                        gamestart.start();
                         waitForClick();
                         AftC = CurrA;
                         AftD = CurrB;
                     }
-                    while (chessBoard[AftC][AftD] == 8 | chessBoard[AftC][AftD] == 9 | chessBoard[AftC][AftD] == 10 | chessBoard[AftC][AftD] == 11 | chessBoard[AftC][AftD] == 12 | chessBoard[AftC][AftD] == 13 | chessBoard[AftC][AftD] == 14) {
+                    while (!isAbleToMove(AftA, AftB, AftC, AftD) | chessBoard[AftC][AftD] == 8 | chessBoard[AftC][AftD] == 9 | chessBoard[AftC][AftD] == 10 | chessBoard[AftC][AftD] == 11 | chessBoard[AftC][AftD] == 12 | chessBoard[AftC][AftD] == 13 | chessBoard[AftC][AftD] == 14) {
                         nameLabel.setText("已选中:请红方落子:错误落子");
+                        gamestart = new Play("src/music/fail.mp3");
+                        gamestart.start();
                         waitForClick();
                         AftC = CurrA;
                         AftD = CurrB;
                         while (AftC == 10 | AftD == 10) {
-                            nameLabel.setText("已选中:请红方落子:错误落子");
+                            nameLabel.setText("已选中:请红方落子:没选到棋子");
+                            gamestart = new Play("src/music/fail.mp3");
+                            gamestart.start();
                             waitForClick();
                             AftC = CurrA;
                             AftD = CurrB;
                         }
                     }
-                    if (isAbleToMove(AftA, AftB, AftC, AftD)) {
                         if (chessBoard[AftC][AftD] == 5) {
                             JOptionPane.showMessageDialog(null, "红方胜");
                             nameLabel.setText("红方胜");
                             break;
                         } else{
-                            playerRedMove(AftA, AftB, AftC, AftD);
+                            playerMove(AftA, AftB, AftC, AftD);
                             nameLabel.setText("已选中:请红方落子:落子成功");
                         }
                         if (checkRed()) {
                             ifRedMove = false;
                         } else {
+                            gamestart = new Play("src/music/jiangjun.mp3");
+                            gamestart.start();
                             JOptionPane.showMessageDialog(null, "将军");
                             ifRedMove = false;
                         }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "走法有误");
-                        ifRedMove = true;
-                        continue;
-                    }
                     clear();
                     addBackGroundImage();
                     addImage();
@@ -1071,62 +1005,73 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                     AftB = CurrB;
                     while (AftA == 10 | AftB == 10) {
                         nameLabel.setText("未选中:请黑方选子:错误选子");
+                        gamestart = new Play("src/music/fail.mp3");
+                        gamestart.start();
                         waitForClick();
                         AftA = CurrA;
                         AftB = CurrB;
                     }
                     while (chessBoard[AftA][AftB] == 0 | chessBoard[AftA][AftB] == 8 | chessBoard[AftA][AftB] == 9 | chessBoard[AftA][AftB] == 10 | chessBoard[AftA][AftB] == 11 | chessBoard[AftA][AftB] == 12 | chessBoard[AftA][AftB] == 13 | chessBoard[AftA][AftB] == 14) {
                         nameLabel.setText("未选中:请黑方选子:错误选子");
+                        gamestart = new Play("src/music/fail.mp3");
+                        gamestart.start();
                         waitForClick();
                         AftA = CurrA;
                         AftB = CurrB;
                         while (AftA == 10 | AftB == 10) {
                             nameLabel.setText("未选中:请黑方选子:错误选子");
+                            gamestart = new Play("src/music/fail.mp3");
+                            gamestart.start();
                             waitForClick();
                             AftA = CurrA;
                             AftB = CurrB;
                         }
                     }
                     nameLabel.setText("已选中：请黑方落子:请落子");
+                    gamestart = new Play("src/music/check.mp3");
+                    gamestart.start();
                     waitForClick();
                     AftC = CurrA;
                     AftD = CurrB;
                     while (AftC == 10 | AftD == 10) {
                         nameLabel.setText("已选中：请黑方落子:没选到棋子");
+                        gamestart = new Play("src/music/fail.mp3");
+                        gamestart.start();
                         waitForClick();
                         AftC = CurrA;
                         AftD = CurrB;
                     }
-                    while (chessBoard[AftC][AftD] == 1 | chessBoard[AftC][AftD] == 2 | chessBoard[AftC][AftD] == 3 | chessBoard[AftC][AftD] == 4 | chessBoard[AftC][AftD] == 5 | chessBoard[AftC][AftD] == 6 | chessBoard[AftC][AftD] == 7) {
-                        nameLabel.setText("已选中：请黑方落子:黑棋落子点不能为黑棋");
+                    while (!isAbleToMove(AftA, AftB, AftC, AftD) |chessBoard[AftC][AftD] == 1 | chessBoard[AftC][AftD] == 2 | chessBoard[AftC][AftD] == 3 | chessBoard[AftC][AftD] == 4 | chessBoard[AftC][AftD] == 5 | chessBoard[AftC][AftD] == 6 | chessBoard[AftC][AftD] == 7) {
+                        nameLabel.setText("已选中：请黑方落子:错误落子");
+                        gamestart = new Play("src/music/fail.mp3");
+                        gamestart.start();
                         waitForClick();
                         AftC = CurrA;
                         AftD = CurrB;
                         while (AftC == 10 | AftD == 10) {
                             nameLabel.setText("已选中：请黑方落子:没选到棋子");
+                            gamestart = new Play("src/music/fail.mp3");
+                            gamestart.start();
                             waitForClick();
                             AftC = CurrA;
                             AftD = CurrB;
                         }
                     }
-                    if (isAbleToMove(AftA, AftB, AftC, AftD)) {
                         if (chessBoard[AftC][AftD] == 12) {
                             JOptionPane.showMessageDialog(null, "黑方胜");
                             nameLabel.setText("黑方胜");
                             break;
                         } else {
-                            playerBlackMove(AftA, AftB, AftC, AftD);
+                            playerMove(AftA, AftB, AftC, AftD);
                             nameLabel.setText("已选中：请黑方落子:落子成功");}
                         if (checkBlack()) {
                             ifRedMove = true;
                         } else {
+                            gamestart = new Play("src/music/jiangjun.mp3");
+                            gamestart.start();
                             JOptionPane.showMessageDialog(null, "将军");
                             ifRedMove = true;
                         }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "走法有误");
-                        ifRedMove = false;
-                    }
                     clear();
                     addBackGroundImage();
                     addImage();
@@ -1897,14 +1842,18 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                         JOptionPane.showMessageDialog(null,"红方胜");
                         ifRedMove=false;
                     }
-                    playerRedMove(actiona, actionb, actionc, actiond);
+                    playerMove(actiona, actionb, actionc, actiond);
                     if (checkRed()) {
                         ifRedMove=false;
                     } else {
+                        gamestart = new Play("src/music/jiangjun.mp3");
+                        gamestart.start();
                         JOptionPane.showMessageDialog(null,"将军");
                         ifRedMove=false;
                     }
                 } else {
+                    gamestart = new Play("src/music/fail.mp3");
+                    gamestart.start();
                     JOptionPane.showMessageDialog(null,"走法有误");
                     ifRedMove=true;
                 }
@@ -2634,14 +2583,18 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                     JOptionPane.showMessageDialog(null,"黑方胜");
                     ifRedMove=true;
                 }
-                playerBlackMove(actiona, actionb, actionc, actiond);
+                playerMove(actiona, actionb, actionc, actiond);
                 if (checkBlack()) {
                     ifRedMove=true;
                 } else {
+                    gamestart = new Play("src/music/jiangjun.mp3");
+                    gamestart.start();
                     JOptionPane.showMessageDialog(null,"将军");
                     ifRedMove=true;
                 }
             } else {
+                gamestart = new Play("src/music/fail.mp3");
+                gamestart.start();
                 JOptionPane.showMessageDialog(null,"走法有误");
                 ifRedMove=false;
             }
@@ -2720,7 +2673,6 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
      * @param file 要切换的歌曲的地址
      */
     private void changeMusic(String file) {
-        gamestart.stop();
         gamestart = new Play(file);
         gamestart.start();
     }

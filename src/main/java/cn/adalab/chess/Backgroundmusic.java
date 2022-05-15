@@ -34,10 +34,6 @@ public interface Backgroundmusic {
         public void run() {
             try {
                 player.play();
-                while (player.isComplete()) {
-                    player = new Player(new FileInputStream(file));
-                    player.play();
-                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
