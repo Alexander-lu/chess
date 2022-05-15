@@ -35,8 +35,6 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
     int AftB;
     int AftC;
     int AftD;
-    JButton musicButton = new JButton("换音乐");
-    JButton stopButton = new JButton("停止播放");
     JButton save = new JButton("save");
     JButton read = new JButton("read");
     JButton auto = new JButton("auto");
@@ -904,10 +902,6 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
         read.addActionListener(this);
         auto.addActionListener(this);
         addMouseListeners();
-        add(musicButton, SOUTH);
-        add(stopButton,SOUTH);
-        musicButton.addActionListener(this);
-        stopButton.addActionListener(this);
         setVisible(true);
     }
     /**
@@ -963,7 +957,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                         AftC = CurrA;
                         AftD = CurrB;
                     }
-                    while (!isAbleToMove(AftA, AftB, AftC, AftD) | chessBoard[AftC][AftD] == 8 | chessBoard[AftC][AftD] == 9 | chessBoard[AftC][AftD] == 10 | chessBoard[AftC][AftD] == 11 | chessBoard[AftC][AftD] == 12 | chessBoard[AftC][AftD] == 13 | chessBoard[AftC][AftD] == 14) {
+                    while (!isAbleToMove(AftA, AftB, AftC, AftD)) {
                         nameLabel.setText("已选中:请红方落子:错误落子");
                         gamestart = new Play("src/music/fail.mp3");
                         gamestart.start();
@@ -1041,7 +1035,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                         AftC = CurrA;
                         AftD = CurrB;
                     }
-                    while (!isAbleToMove(AftA, AftB, AftC, AftD) |chessBoard[AftC][AftD] == 1 | chessBoard[AftC][AftD] == 2 | chessBoard[AftC][AftD] == 3 | chessBoard[AftC][AftD] == 4 | chessBoard[AftC][AftD] == 5 | chessBoard[AftC][AftD] == 6 | chessBoard[AftC][AftD] == 7) {
+                    while (!isAbleToMove(AftA, AftB, AftC, AftD)) {
                         nameLabel.setText("已选中：请黑方落子:错误落子");
                         gamestart = new Play("src/music/fail.mp3");
                         gamestart.start();
@@ -1076,7 +1070,6 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                     addBackGroundImage();
                     addImage();
                 }
-
             }
     }
     /**
@@ -1105,13 +1098,6 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
         }
         if ("auto".equals(event.getActionCommand())) {
             readActions();
-        }
-        if ("换音乐".equals(event.getActionCommand())) {
-            int a = randomGenerator.nextInt(1, 2);
-            changeMusic(getMusicName(a));
-        }
-        if ("停止播放".equals(event.getActionCommand())) {
-            stopMusic();
         }
     }
     /**
@@ -2667,28 +2653,5 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
         clear();
         addBackGroundImage();
         addImage();
-    }
-    /**
-     * 将音乐切换为其他歌曲
-     * @param file 要切换的歌曲的地址
-     */
-    private void changeMusic(String file) {
-        gamestart = new Play(file);
-        gamestart.start();
-    }
-    /**
-     * 停止播放
-     */
-    private void stopMusic() {
-        gamestart.stop();
-    }
-    /**
-     * 获得随机的歌曲名字
-     * @param a 随机数
-     * @return 歌曲的名字
-     */
-    private String getMusicName(int a) {
-        if(a==1){ return "src/music/1.mp3";}
-        else { return "src/music/2.mp3";}
     }
 }
