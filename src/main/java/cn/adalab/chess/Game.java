@@ -14,6 +14,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
     RandomGenerator randomGenerator = RandomGenerator.getInstance();
     /* 判断红棋还是黑棋先走 */
     boolean ifRedMove= true;
+    boolean ifKingFace= false;
     /* 初始化棋盘 */
     GImage ChessBoard;
     int[][] chessBoard = {
@@ -261,7 +262,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                 } else {
                     return false;
                 }
-                case 4:
+            case 4:
                 if (chessBoard[c][d] == 1) {
                     return false;
                 } else if (chessBoard[c][d] == 2) {
@@ -305,17 +306,25 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                     return false;
                 }
                 //不能出九宫
-                if (c >= 3) {return false;}
                 if (d <= 2) {return false;}
                 if (d >= 6) {return false;}
+                if (c >= 3) {if(b == d & c > a + 1){
+                        for (int i = a + 1; i < c; i++) {
+                            if (chessBoard[i][b] > 0) {
+                                return false;
+                            }
+                        }
+                        if(chessBoard[c][d]==12){
+                            ifKingFace=true;
+                            return true;
+                        }
+                    }return false;}
                 //一次只能走一格
                 //不能走斜线
                 if ((c == a && d == b + 1) || (c == a && d == b - 1) || (c == a + 1 && d == b) || (c == a - 1 && d == b)) {
                     return true;
-                } else {
-                    return false;
                 }
-
+                return false;
             case 6:
                 if (chessBoard[c][d] == 1) {
                     return false;
@@ -593,16 +602,28 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                     return false;
                 }
                 //不能出九宫
-                if (c <= 6) {return false;}
                 if (d <= 2) {return false;}
                 if (d >= 6) {return false;}
+                if (c <= 6) {
+                    if (b == d & a-1 > c) {
+                        for (int i = a - 1; i > c; i--) {
+                            if (chessBoard[i][b] > 0) {
+                                return false;
+                            }
+                        }
+                        if(chessBoard[c][d]==5){
+                            ifKingFace=true;
+                            return true;
+                        }
+                    }
+                    return false;
+                }
                 //一次只能走一格
                 //不能走斜线
                 if ((c == a && d == b + 1) || (c == a && d == b - 1) || (c == a + 1 && d == b) || (c == a - 1 && d == b)) {
                     return true;
-                } else {
-                    return false;
                 }
+                return false;
             case 13:
                 if (chessBoard[c][d] == 8) {
                     return false;
@@ -992,6 +1013,13 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                     clear();
                     addBackGroundImage();
                     addImage();
+                    checkRed();
+                    checkBlack();
+                    if(ifKingFace){
+                        JOptionPane.showMessageDialog(null, "黑方胜");
+                        nameLabel.setText("黑方胜");
+                        break;
+                    }
                 } else {
                     nameLabel.setText("请黑方选子");
                     waitForClick();
@@ -1069,6 +1097,13 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                     clear();
                     addBackGroundImage();
                     addImage();
+                    checkRed();
+                    checkBlack();
+                    if(ifKingFace){
+                        JOptionPane.showMessageDialog(null, "红方胜");
+                        nameLabel.setText("红方胜");
+                        break;
+                    }
                 }
             }
     }
@@ -1824,11 +1859,11 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                 }
 
                 if (isAbleToMove(actiona, actionb, actionc, actiond)) {
+                    playerMove(actiona, actionb, actionc, actiond);
                     if (chessBoard[actionc][actiond] == 5) {
                         JOptionPane.showMessageDialog(null,"红方胜");
                         ifRedMove=false;
                     }
-                    playerMove(actiona, actionb, actionc, actiond);
                     if (checkRed()) {
                         ifRedMove=false;
                     } else {
@@ -1843,6 +1878,12 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                     JOptionPane.showMessageDialog(null,"走法有误");
                     ifRedMove=true;
                 }
+        checkRed();
+        checkBlack();
+        if(ifKingFace){
+            JOptionPane.showMessageDialog(null, "黑方胜");
+            nameLabel.setText("黑方胜");
+        }
             }
     /**
      * 功能：移动黑棋
@@ -2565,11 +2606,11 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                 }
             }
             if (isAbleToMove(actiona, actionb, actionc, actiond)) {
+                playerMove(actiona, actionb, actionc, actiond);
                 if (chessBoard[actionc][actiond] == 12) {
                     JOptionPane.showMessageDialog(null,"黑方胜");
                     ifRedMove=true;
                 }
-                playerMove(actiona, actionb, actionc, actiond);
                 if (checkBlack()) {
                     ifRedMove=true;
                 } else {
@@ -2584,7 +2625,12 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                 JOptionPane.showMessageDialog(null,"走法有误");
                 ifRedMove=false;
             }
-
+        checkRed();
+        checkBlack();
+        if(ifKingFace){
+            JOptionPane.showMessageDialog(null, "红方胜");
+            nameLabel.setText("红方胜");
+        }
     }
     /**
      * 功能：获取鼠标的坐标
