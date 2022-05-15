@@ -1,5 +1,6 @@
 package cn.adalab.chess;
 import acm.graphics.GImage;
+import acm.graphics.GLine;
 import acm.program.GraphicsProgram;
 import acm.util.RandomGenerator;
 import javax.swing.*;
@@ -743,33 +744,16 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
     /**
      * 功能：检查是否将军
      */
-    private boolean checkRed() {
+    private boolean check() {
         //全体循环，不知道将哪头的军
         for (int row = 0; row < chessBoard.length; row++) {
             for (int col = 0; col < chessBoard[0].length; col++) {
                 getMoveRoute(row, col);
                 for (Map<String, Integer> map : listMove) {
-                        if ((chessBoard[map.get("row")][map.get("col")]) == 5) {
+                        if ((chessBoard[map.get("row")][map.get("col")]) == 5 | (chessBoard[map.get("row")][map.get("col")]) == 12) {
                             return false;
                         }
                 }
-            }
-        }
-        listMove.clear();
-        return true;
-    }
-    private boolean checkBlack() {
-        //全体循环，不知道将哪头的军
-        for (int row = 0; row < chessBoard.length; row++) {
-            for (int col = 0; col < chessBoard[0].length; col++) {
-                getMoveRoute(row, col);
-                for (Map<String, Integer> map : listMove) {
-                        if ((chessBoard[map.get("row")][map.get("col")]) == 12) {
-                            return false;
-                    }
-
-                }
-
             }
         }
         listMove.clear();
@@ -844,66 +828,63 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
         }
     }
     private int tansformB(int X){
-        if (X<= 70 & X >= 40 ) {
+        if (X<= 73 & X >= 28 ) {
             return 0;
         }
-        else if (X<= 132 & X >= 102 ) {
+        else if (X<= 135 & X >= 90 ) {
             return 1;
         }
-
-        else if (X<= 193 & X >= 163 ) {
+        else if (X<= 195 & X >= 150 ) {
             return 2;
         }
-        else if (X<= 255 & X >= 225 ) {
+        else if (X<= 260 & X >= 215 ) {
             return 3;
         }
-        else if (X<= 316 & X >= 286 ) {
+        else if (X<= 322 & X >= 277 ) {
             return 4;
         }
-        else if (X<= 377 & X >= 347 ) {
+        else if (X<= 385 & X >= 340 ) {
             return 5;
         }
-        else if (X<= 439 & X >= 409 ) {
+        else if (X<= 447 & X >= 402 ) {
             return 6;
         }
-        else if (X<= 500 & X >= 470 ) {
+        else if (X<= 513 & X >= 468 ) {
             return 7;
         }
-        else if (X<= 562 & X >= 532 ) {
+        else if (X<= 573 & X >= 528 ) {
             return 8;
         }else {      return 10;}
-
     }
     private int tansformA(int Y){
-        if (Y<= 68 & Y >= 38 ) {
+        if (Y<= 75 & Y >= 30 ) {
             return 0;
         }
-        else if (Y<= 130 & Y >= 100 ) {
+        else if (Y<= 137 & Y >= 92 ) {
             return 1;
         }
-
-        else if (Y<= 192 & Y >= 162 ) {
+        else if (Y<= 198 & Y >= 153 ) {
             return 2;
         }
-        else if (Y<= 254 & Y >= 224 ) {
+        else if (Y<= 260 & Y >= 215 ) {
             return 3;
         }
-        else if (Y<= 319 & Y >= 289 ) {
+        else if (Y<= 321 & Y >= 279 ) {
             return 4;
         }
-        else if (Y<= 381 & Y >= 351 ) {
+        else if (Y<= 385 & Y >= 340 ) {
             return 5;
         }
-        else if (Y<= 442 & Y >= 412 ) {
+        else if (Y<= 445 & Y >= 401 ) {
             return 6;
         }
-        else if (Y<= 506 & Y >= 476 ) {
+        else if (Y<= 510 & Y >= 465 ) {
             return 7;
         }
-        else if (Y<= 566 & Y >= 536 ) {
+        else if (Y<= 570 & Y >= 525 ) {
             return 8;
         }
-        else if (Y<= 626 & Y >= 596 ) {
+        else if (Y<= 634 & Y >= 589 ) {
             return 9;
         } else{return 10;}
     }
@@ -933,6 +914,46 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
         addBackGroundImage();
         addImage();
         nameLabel.setText("点击屏幕开始游戏");
+//        测试Y轴坐标
+//        add(new GLine(0,30,500,30));
+//        add(new GLine(0,75,500,75));
+//        add(new GLine(0,92,500,92));
+//        add(new GLine(0,137,500,137));
+//        add(new GLine(0,153,500,153));
+//        add(new GLine(0,198,500,198));
+//        add(new GLine(0,215,500,215));
+//        add(new GLine(0,260,500,260));
+//        add(new GLine(0,279,500,279));
+//        add(new GLine(0,321,500,321));
+//        add(new GLine(0,340,500,340));
+//        add(new GLine(0,385,500,385));
+//        add(new GLine(0,401,500,401));
+//        add(new GLine(0,445,500,445));
+//        add(new GLine(0,465,500,465));
+//        add(new GLine(0,510,500,510));
+//        add(new GLine(0,525,500,525));
+//        add(new GLine(0,570,500,570));
+//        add(new GLine(0,589,500,589));
+//        add(new GLine(0,634,500,634));
+//        测试X轴坐标
+//        add(new GLine(28,0,28,1000));
+//        add(new GLine(73,0,73,1000));
+//        add(new GLine(90,0,90,1000));
+//        add(new GLine(135,0,135,1000));
+//        add(new GLine(150,0,150,1000));
+//        add(new GLine(195,0,195,1000));
+//        add(new GLine(215,0,215,1000));
+//        add(new GLine(260,0,260,1000));
+//        add(new GLine(277,0,277,1000));
+//        add(new GLine(322,0,322,1000));
+//        add(new GLine(340,0,340,1000));
+//        add(new GLine(385,0,385,1000));
+//        add(new GLine(402,0,402,1000));
+//        add(new GLine(447,0,447,1000));
+//        add(new GLine(468,0,468,1000));
+//        add(new GLine(513,0,513,1000));
+//        add(new GLine(528,0,528,1000));
+//        add(new GLine(573,0,573,1000));
         waitForClick();
             while (true) {
                 if (ifRedMove) {
@@ -1002,7 +1023,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                             playerMove(AftA, AftB, AftC, AftD);
                             nameLabel.setText("已选中:请红方落子:落子成功");
                         }
-                        if (checkRed()) {
+                        if (check()) {
                             ifRedMove = false;
                         } else {
                             gamestart = new Play("src/music/jiangjun.mp3");
@@ -1013,8 +1034,6 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                     clear();
                     addBackGroundImage();
                     addImage();
-                    checkRed();
-                    checkBlack();
                     if(ifKingFace){
                         JOptionPane.showMessageDialog(null, "黑方胜");
                         nameLabel.setText("黑方胜");
@@ -1086,7 +1105,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                         } else {
                             playerMove(AftA, AftB, AftC, AftD);
                             nameLabel.setText("已选中：请黑方落子:落子成功");}
-                        if (checkBlack()) {
+                        if (check()) {
                             ifRedMove = true;
                         } else {
                             gamestart = new Play("src/music/jiangjun.mp3");
@@ -1097,8 +1116,6 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                     clear();
                     addBackGroundImage();
                     addImage();
-                    checkRed();
-                    checkBlack();
                     if(ifKingFace){
                         JOptionPane.showMessageDialog(null, "红方胜");
                         nameLabel.setText("红方胜");
@@ -1864,7 +1881,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                         JOptionPane.showMessageDialog(null,"红方胜");
                         ifRedMove=false;
                     }
-                    if (checkRed()) {
+                    if (check()) {
                         ifRedMove=false;
                     } else {
                         gamestart = new Play("src/music/jiangjun.mp3");
@@ -1878,8 +1895,6 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                     JOptionPane.showMessageDialog(null,"走法有误");
                     ifRedMove=true;
                 }
-        checkRed();
-        checkBlack();
         if(ifKingFace){
             JOptionPane.showMessageDialog(null, "黑方胜");
             nameLabel.setText("黑方胜");
@@ -2611,7 +2626,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                     JOptionPane.showMessageDialog(null,"黑方胜");
                     ifRedMove=true;
                 }
-                if (checkBlack()) {
+                if (check()) {
                     ifRedMove=true;
                 } else {
                     gamestart = new Play("src/music/jiangjun.mp3");
@@ -2625,8 +2640,6 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                 JOptionPane.showMessageDialog(null,"走法有误");
                 ifRedMove=false;
             }
-        checkRed();
-        checkBlack();
         if(ifKingFace){
             JOptionPane.showMessageDialog(null, "红方胜");
             nameLabel.setText("红方胜");
