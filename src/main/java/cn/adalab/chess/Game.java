@@ -2661,8 +2661,8 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        int width = chessBoard[0].length;    // 心形的宽度
-        int height = chessBoard.length;      // 心形的高度
+        int width = chessBoard[0].length;
+        int height = chessBoard.length;
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
                 chessBoard[row][col]=scanner.nextInt();
