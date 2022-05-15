@@ -9,14 +9,15 @@ import java.awt.event.MouseEvent;
 import java.io.*;
 import java.util.*;
 public class Game extends GraphicsProgram  implements Backgroundmusic{
-    /* 初始化音乐 */
+    /** 初始化音乐 */
     public Play gamestart;
-    /* 生成随机数 */
+    /** 生成随机数 */
     RandomGenerator randomGenerator = RandomGenerator.getInstance();
-    /* 判断红棋还是黑棋先走 */
+    /** 判断红棋还是黑棋先走 */
     boolean ifRedMove= true;
+    /** 判断将军有没有面对面 */
     boolean ifKingFace= false;
-    /* 初始化棋盘 */
+    /** 初始化棋盘 */
     GImage ChessBoard;
     int[][] chessBoard = {
             {1, 2, 3, 4, 5, 4, 3, 2, 1},
@@ -30,11 +31,13 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {8, 9, 10, 11, 12, 11, 10, 9, 8},
     };
-    /* CurrA和CurrB分别代表现在鼠标的Y和X */
+    /** CurrA和CurrB分别代表鼠标现在的Y和X */
     int CurrA;
     int CurrB;
+    /** AftA和AftB分别代表 选择棋子的Y和X */
     int AftA;
     int AftB;
+    /** AftC和AftD分别代表 棋子落点的Y和X */
     int AftC;
     int AftD;
     JButton save = new JButton("save");
@@ -47,18 +50,14 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
     public static final int APPLICATION_HEIGHT = 700;
     List<String> actions = new ArrayList<>();
     List<Map<String, Integer>> listMove = new ArrayList<Map<String, Integer>>();
-    /**
-     * 功能：移动棋子
-     */
+    /** 功能：移动棋子 */
     public void playerMove(int a, int b, int c, int d) {
         chessBoard[c][d] = chessBoard[a][b];
         chessBoard[a][b] = 0;
         gamestart = new Play("src/music/move.mp3");
         gamestart.start();
         }
-    /**
-     * 功能：读取文件获取Actions
-     */
+    /** 功能：读取文件获取Actions */
     private void readActions() {
         File readFileName = JFileChooserDemo.getFileName();
         Scanner scanner = null;
@@ -76,9 +75,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
         }
         gameMove();
     }
-    /**
-     * 功能：读取文件跑游戏
-     */
+    /** 功能：读取Actions跑游戏 */
     public void gameMove() {
         for (int i = 0; i < actions.size(); i++) {
             if (ifRedMove) {
@@ -103,13 +100,13 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                }
             }
         }}
-    /**
-     * 功能：判断从(a,b)能否移动到（c,d）
-     */
+    /** 功能：判断从(a,b)能否移动到（c,d）;如果将军面对面，将ifKingFace变为true */
     public boolean isAbleToMove(int a, int b, int c, int d) {
+        //不能自己吃自己
         if (a == c & b == d) {
             return false;
         }
+        //不能跑到不存在的点去
         if (a < 0 | a >= 10) {
             return false;
         }
@@ -122,7 +119,6 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
         if (d < 0 | d >= 9) {
             return false;
         }
-        //不能吃自己伙的棋子
         switch (chessBoard[a][b]) {
             case 0:
                 return false;
@@ -144,8 +140,6 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                 }
                 //不能走斜线
                 if(c!=a&d!=b){return false;}
-                //竖走
-                //判断中间是否有棋子
                 //车往左走
                 if (a == c & b > d) {
                     for (int i = b - 1; i > d; i--) {
@@ -283,8 +277,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                 if (c >= 3) {return false;}
                 if (d <= 2) {return false;}
                 if (d >= 6) {return false;}
-                //一次只能走一格
-                //不能走横线或竖线
+                //一次只能走一格 不能走横线或竖线
                 if ((c == a-1 && d == b+1) || (c == a-1 && d == b-1) || (c == a+1 && d == b+1) || (c == a+1 && d == b-1)) {
                     return true;
                 } else {
@@ -309,6 +302,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                 //不能出九宫
                 if (d <= 2) {return false;}
                 if (d >= 6) {return false;}
+                //如果将军面对面，将ifKingFace变为true
                 if (c >= 3) {if(b == d & c > a + 1){
                         for (int i = a + 1; i < c; i++) {
                             if (chessBoard[i][b] > 0) {
@@ -320,8 +314,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                             return true;
                         }
                     }return false;}
-                //一次只能走一格
-                //不能走斜线
+                //一次只能走一格 不能走斜线
                 if ((c == a && d == b + 1) || (c == a && d == b - 1) || (c == a + 1 && d == b) || (c == a - 1 && d == b)) {
                     return true;
                 }
@@ -343,12 +336,9 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                     return false;
                 }
                 //不能走斜线
-                //竖走
                 if(c!=a&d!=b){return false;}
-                //不能走斜线
-                //判断中间是否有棋子
                 int paoFindOne = 0;
-                //车往左走
+                //炮往左走
                 if (a == c & b > d) {
                     for (int i = b - 1; i > d; i--) {
                         if (chessBoard[a][i] > 0) {
@@ -356,7 +346,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                         }
                     }
                 }
-                //车往右走
+                //炮往右走
                 if (a == c & b < d) {
                     for (int i = b + 1; i < d; i++) {
                         if (chessBoard[a][i] > 0) {
@@ -364,7 +354,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                         }
                     }
                 }
-                //车往上走
+                //炮往上走
                 if (b == d & a > c) {
                     for (int i = a - 1; i > c; i--) {
                         if (chessBoard[i][b] > 0) {
@@ -372,7 +362,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                         }
                     }
                 }
-                //车往下走
+                //炮往下走
                 if (b == d & a < c) {
                     for (int i = a + 1; i < c; i++) {
                         if (chessBoard[i][b] > 0) {
@@ -401,22 +391,16 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                 } else if (chessBoard[c][d] == 7) {
                     return false;
                 }
-                //不能出九宫
-                //小卒过河不回头
+                //小卒过河后只能往前，左，右走 一次只能走一格 不能走斜线
                 if (c >= 5) {
-                    //一次只能走一格
-                    //不能走斜线
                     if ((c == a && d == b + 1) || (c == a && d == b - 1) || (c == a + 1 && d == b)) {
                         return true;
                     } else {
                         return false;
                     }
                 }
-                //不许向后退
-                //只能往前走
+                //小卒未过河只能往前走 一次只能走一格 不能走斜线
                 if (c < 5) {
-                    //一次只能走一格
-                    //不能走斜线
                     if (c == a + 1 && d == b) {
                         return true;
                     } else {
@@ -440,9 +424,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                     return false;
                 }
                 //不能走斜线
-                //竖走
                 if(c!=a&d!=b){return false;}
-                //判断中间是否有棋子
                 //车往左走
                 if (a == c & b > d) {
                     for (int i = b - 1; i > d; i--) {
@@ -579,8 +561,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                 if (c <= 6) {return false;}
                 if (d <= 2) {return false;}
                 if (d >= 6) {return false;}
-                //一次只能走一格
-                //不能走横线或竖线
+                //一次只能走一格 不能走横线或竖线
                 if ((c == a-1 && d == b+1) || (c == a-1 && d == b-1) || (c == a+1 && d == b+1) || (c == a+1 && d == b-1)) {
                     return true;
                 } else {
@@ -605,6 +586,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                 //不能出九宫
                 if (d <= 2) {return false;}
                 if (d >= 6) {return false;}
+                //如果将军面对面，将ifKingFace变为true
                 if (c <= 6) {
                     if (b == d & a-1 > c) {
                         for (int i = a - 1; i > c; i--) {
@@ -619,8 +601,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                     }
                     return false;
                 }
-                //一次只能走一格
-                //不能走斜线
+                //一次只能走一格 不能走斜线
                 if ((c == a && d == b + 1) || (c == a && d == b - 1) || (c == a + 1 && d == b) || (c == a - 1 && d == b)) {
                     return true;
                 }
@@ -641,12 +622,10 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                 } else if (chessBoard[c][d] == 14) {
                     return false;
                 }
-                //竖走
                 //不能走斜线
                 if(c!=a&d!=b){return false;}
-                //判断中间是否有棋子
                 int paoFindTwo = 0;
-                //车往左走
+                //炮往左走
                 if (a == c & b > d) {
                     for (int i = b - 1; i > d; i--) {
                         if (chessBoard[a][i] > 0) {
@@ -654,7 +633,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                         }
                     }
                 }
-                //车往右走
+                //炮往右走
                 if (a == c & b < d) {
                     for (int i = b + 1; i < d; i++) {
                         if (chessBoard[a][i] > 0) {
@@ -662,7 +641,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                         }
                     }
                 }
-                //车往上走
+                //炮往上走
                 if (b == d & a > c) {
                     for (int i = a - 1; i > c; i--) {
                         if (chessBoard[i][b] > 0) {
@@ -670,7 +649,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                         }
                     }
                 }
-                //车往下走
+                //炮往下走
                 if (b == d & a < c) {
                     for (int i = a + 1; i < c; i++) {
                         if (chessBoard[i][b] > 0) {
@@ -699,22 +678,16 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                 } else if (chessBoard[c][d] == 14) {
                     return false;
                 }
-                //不能出九宫
-                //小卒过河不回头
+                //小卒过河后只能往前，左，右走 一次只能走一格 不能走斜线
                 if (c < 5) {
-                    //一次只能走一格
-                    //不能走斜线
                     if ((c == a && d == b + 1) || (c == a && d == b - 1) || (c == a - 1 && d == b)) {
                         return true;
                     } else {
                         return false;
                     }
                 }
-                //不许向后退
-                //只能往前走
+                //小卒未过河只能往前走 一次只能走一格 不能走斜线
                 if (c >= 5) {
-                    //一次只能走一格
-                    //不能走斜线
                     if (c == a - 1 && d == b) {
                         return true;
                     } else {
@@ -726,11 +699,8 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
         }
         return true;
     }
-    /**
-     * 功能：得到某棋子的可移动路线图
-     */
+    /** 功能：得到某棋子的所有可合法移动的坐标，并保存进Hashmap listMove里 */
     private void getMoveRoute(int a, int b) {listMove.clear();
-        //懒得分类挑，反正电脑计算快
         for (int row = 0; row < chessBoard.length; row++) {
             for (int col = 0; col < chessBoard[0].length; col++) {
                 if (isAbleToMove(a, b, row, col)) {
@@ -741,9 +711,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                 }
             }
         }}
-    /**
-     * 功能：检查是否将军
-     */
+    /** 功能：检查是否将军 */
     private boolean check() {
         //全体循环，不知道将哪头的军
         for (int row = 0; row < chessBoard.length; row++) {
@@ -759,14 +727,16 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
         listMove.clear();
         return true;
     }
+    /** 功能：添加棋盘 */
     private void addBackGroundImage(){
         ChessBoard = new GImage("images/MAIN.GIF");
         ChessBoard.setSize(600,670);
         add(ChessBoard);
     }
+    /** 功能：添加棋子 */
     private void addImage(){
-        int width = chessBoard[0].length;    // 心形的宽度
-        int height = chessBoard.length;      // 心形的高度
+        int width = chessBoard[0].length;
+        int height = chessBoard.length;
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
                 if(chessBoard[row][col]>0) {
@@ -777,6 +747,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
             }
         }
     }
+    /** 功能：将棋子的位置转化为坐标 */
     private int tansformX(int b){
         switch (b) {
             case 0:
@@ -827,6 +798,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                 return 100;
         }
     }
+    /** 功能：将棋子的坐标转化为位置*/
     private int tansformB(int X){
         if (X<= 73 & X >= 28 ) {
             return 0;
@@ -888,6 +860,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
             return 9;
         } else{return 10;}
     }
+    /** 功能：初始化*/
     @Override
     public void init() {
         setTitle("中国象棋");
@@ -906,9 +879,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
         addMouseListeners();
         setVisible(true);
     }
-    /**
-     * 功能：开始游戏
-     */
+    /** 功能：开始游戏 */
     @Override
     public void run() {
         addBackGroundImage();
@@ -1124,11 +1095,10 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                 }
             }
     }
-    /**
-     * 功能：读取，保存的JButton
-     */
+    /** 功能：对按钮进行反馈 */
     @Override
     public void actionPerformed(ActionEvent event) {
+        /** 功能：输入文本移动棋子 */
         if ("text".equals(event.getActionCommand())) {
             if (ifRedMove) {
                 realRedGameMove(TextField.getText());
@@ -1142,19 +1112,20 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
                 addImage();
             }
         }
+        /** 功能：保存当前棋谱到D盘根目录 */
         if ("save".equals(event.getActionCommand())) {
             saveAsFileWriter();
         }
+        /** 功能：读取棋谱 */
         if ("read".equals(event.getActionCommand())) {
             readAsFileWriter();
         }
+        /** 功能：读取Actions*/
         if ("auto".equals(event.getActionCommand())) {
             readActions();
         }
     }
-    /**
-     * 功能：移动黑棋
-     */
+    /** 功能：移动红棋 */
     private void realRedGameMove(String inputName) {
             int actiona = 0;
             int actionb = 0;
@@ -1900,9 +1871,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
             nameLabel.setText("黑方胜");
         }
             }
-    /**
-     * 功能：移动黑棋
-     */
+    /** 功能：移动黑棋 */
     private void realBlackGameMove(String inputName) {
         int actiona = 0;
         int actionb = 0;
@@ -2645,17 +2614,13 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
             nameLabel.setText("红方胜");
         }
     }
-    /**
-     * 功能：获取鼠标的坐标
-     */
+    /** 功能：获取鼠标的坐标 */
     @Override
     public void mouseMoved(MouseEvent e) {
         CurrB =tansformB(e.getX());
         CurrA =tansformA(e.getY());
     }
-    /**
-     * 功能：将当前棋谱保存到D盘
-     */
+    /** 功能：将当前棋谱保存到D盘 */
     private void saveAsFileWriter() {
         int random = randomGenerator.nextInt(1, 999);
         String xml = "";
@@ -2687,9 +2652,7 @@ public class Game extends GraphicsProgram  implements Backgroundmusic{
             e.printStackTrace();
         }
     }
-    /**
-     * 功能：读取文件获取本地棋谱
-     */
+    /** 功能：读取文件获取本地棋谱 */
     private void readAsFileWriter() {
         File readFileName = JFileChooserDemo.getFileName();
         Scanner scanner = null;
